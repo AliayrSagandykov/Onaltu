@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ассоциация ОҢАЛТУ</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script src="/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://mapgl.2gis.com/api/js/v1"></script>
+
+</head>
+
+<body>
+    <!-- Верхний бар -->
+    <div class="bg-white border-bottom py-2">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-telephone me-1"></i> <span class="me-3">
+                    8 (775) 432 77 76</span>
+                <i class="bi bi-eye me-1"></i> <a href="#" class="me-3">Version for the visually impaired</a>
+                <div class="dropdown">
+                    <button class="btn btn-outline-dark btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                        🌐EN
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="../ru/about.html">Русский</a></li>
+                        <li><a class="dropdown-item" href="../kz/about.html">Қазақша</a></li>
+                        <li><a class="dropdown-item" href="../en/about.html">English</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Нижняя навигация -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <img src="/images/onaltu_logo.png" alt="ОНАЛТУ" height="128" class="me-2">
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link " href="index.html">Main page</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About us</a></li>
+                    <li class="nav-item"><a class="nav-link " href="membership.html">Membership</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <!-- Основной контент -->
+    <div class="about-container">
+        <div class="container">
+            <!-- ВСТУПЛЕНИЕ -->
+            <div class="intro-text mb-4">
+                <div class="history-image">
+                    <img src="/images/onaltumain.jpg" alt="main image" class="img-fluid">
+                </div>
+                <p class="lead mt-5 mb-5">
+                    The ONALTU Association unites rehabilitation centers nationwide to work together on quality
+                    standards, training specialists, and implementing international best practices.
+                </p>
+            </div>
+
+            <div class="row">
+                <!-- Боковое меню -->
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <h3 class="sidebar-title">О нас</h3>
+                        <ul class="sidebar-menu">
+                            <li><a href="#history" class="active">History of creation</a></li>
+                            <li><a href="#rule">Management bodies</a></li>
+                            <li><a href="#workDirections">The main directions in the work</a></li>
+                            <li><a href="#vision">Our vision</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Контент страницы -->
+                <div class="col-lg-8">
+                    <div class="content-section">
+                        <h2 class="section-title" id="history">History of creation</h2>
+
+                        <div class="content" style="padding-bottom: 25px;">
+                            <div class="text">
+                                <p>Our association is designed to become an experimental platform for the development,
+                                    monitoring, research, analysis, testing, implementation and implementation of modern
+                                    models of rehabilitation care.</p>
+
+                                <p>We bring together the best rehabilitation centers in the country to create uniform
+                                    standards of medical care based on international best practices.</p>
+                            </div>
+                        </div>
+                        <section class="governance-section"
+                            style="  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 10px;padding-top: 50px;">
+                            <div class="container">
+                                <h2 class="section-title mt -5" id="rule">MANAGEMENT BODIES</h2>
+
+                                <div class="governance-container">
+                                    <div class="governance-structure">
+                                        <!-- Высший орган -->
+                                        <div class="governance-level">
+                                            <div class="governance-card">
+                                                <div class="card-icon">
+                                                    <i class="fas fa-users"></i>
+                                                </div>
+                                                <h3 class="card-title">General Meeting</h3>
+                                                <div class="card-subtitle">The Supreme Governing Body</div>
+                                                <div class="card-content mt-5">
+                                                    <p>The highest governing body of the association, which has
+                                                        exclusive competence in resolving key issues of the
+                                                        organization's activities.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Высшее должностное лицо -->
+                                        <div class="governance-level">
+                                            <div class="governance-card">
+                                                <div class="card-icon">
+                                                    <i class="fas fa-user-tie"></i>
+                                                </div>
+                                                <h3 class="card-title">President of the Association</h3>
+                                                <div class="card-subtitle">Senior official</div>
+                                                <div class="card-content mt -5 ">
+                                                    <p>He is elected by the decision of the General Meeting of the
+                                                        Association for a term of 5 (five) years. Carries out the
+                                                        general management of the association's activities and
+                                                        represents its interests.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Контрольный орган -->
+                                        <div class="governance-level">
+                                            <div class="governance-card">
+                                                <div class="card-icon">
+                                                    <i class="fas fa-shield-alt"></i>
+                                                </div>
+                                                <h3 class="card-title">The Control and Auditing Commission</h3>
+                                                <div class="card-subtitle">The control body</div>
+                                                <div class="card-content mt-5">
+                                                    <p>Monitors the financial and economic activities of the
+                                                        association, compliance with the statutory requirements and the
+                                                        implementation of decisions of the General Meeting.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="note-box">
+                                    <div class="note-title ">The norm of representation:</div>
+                                    <p class="mb-5">Each member of the Association has the right to one representative
+                                        with the right to one vote at the General Meeting.</p>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="container">
+
+                            <div class="directions-container">
+                                <h2 class="section-title" id="workDirections">Professional activity</h2>
+
+                                <!-- Направление 1 -->
+                                <div class="direction-item" id="specSynergy">
+                                    <div class="direction-number">1</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Involvement of scientists and specialists</div>
+                                        <div class="direction-description">Bringing together experts to solve current
+                                            scientific and practical problems, and developing professional relationships
+                                            in the field of medical rehabilitation.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 2 -->
+                                <div class="direction-item" id="expCollective">
+                                    <div class="direction-number">2</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Generalization of professional experience</div>
+                                        <div class="direction-description">Systematization and dissemination of the best
+                                            practices of the association's members to improve the quality of
+                                            rehabilitation services.
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 3 -->
+                                <div class="direction-item" id="proGuard">
+                                    <div class="direction-number">3</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Professional protection of participants</div>
+                                        <div class="direction-description">Обеспечение правовой и профессиональной
+                                            поддержки участников ассоциации, защита их интересов.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 4 -->
+                                <div class="direction-item" id="certGlobal">
+                                    <div class="direction-number">4</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Certification and accreditation</div>
+                                        <div class="direction-description">Provision of services for certification of
+                                            rehabilitation centers for compliance with national and international
+                                            standards.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 5 -->
+                                <div class="direction-item" id="collabNet">
+                                    <div class="direction-number">5</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Interaction and partnership</div>
+                                        <div class="direction-description">Cooperation with organizations in Kazakhstan
+                                            to
+                                            protect the rights and interests of association members.</div>
+
+                                    </div>
+                                </div>
+
+                                <h2 class="section-title mt-5">Educational and organizational activities</h2>
+
+                                <!-- Направление 6 -->
+                                <div class="direction-item" id="eventHub">
+                                    <div class="direction-number">6</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Conducting events</div>
+                                        <div class="direction-description">Organization of seminars, workshops,
+                                            conferences, meetings and exhibitions for the exchange of experience.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 7 -->
+                                <div class="direction-item" id="expertAdvice">
+                                    <div class="direction-number">7</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Participation in expert councils</div>
+                                        <div class="direction-description">Participation in expert councils in areas
+                                            related to rehabilitation.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 8 -->
+                                <div class="direction-item" id="eduSphere">
+                                    <div class="direction-number">8</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Educational activities</div>
+                                        <div class="direction-description">Organizing and conducting educational
+                                            events on problems in the field of medical rehabilitation.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 9 -->
+                                <div class="direction-item" id="globalConnect">
+                                    <div class="direction-number">9</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">International cooperation</div>
+                                        <div class="direction-description">Development of international cooperation in
+                                            the field of medical rehabilitation and rehabilitation treatment.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 10 -->
+                                <div class="direction-item" id="investProjects">
+                                    <div class="direction-number">10</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Participation in investment projects</div>
+                                        <div class="direction-description">Participation in investment projects
+                                            aimed at the development of the rehabilitation sector.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 11 -->
+                                <div class="direction-item" id="memberSupport">
+                                    <div class="direction-number">11</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Support of association members</div>
+                                        <div class="direction-description">Providing organizational, informational and
+                                            other support to the members of the association.</div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <h4 id="vision">Our vision</h4>
+                                <p>We strive to create an integrated rehabilitation care system that combines the best
+                                    domestic and international practices, ensures the availability of quality services
+                                    for all residents of Kazakhstan and will become a model for other countries in the
+                                    region.</p>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <i class="fas fa-check-circle me-3 text-success"
+                                                style="font-size: 1.2rem;"></i>
+                                            <div>Development and implementation of uniform quality standards</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <i class="fas fa-check-circle me-3 text-success"
+                                                style="font-size: 1.2rem;"></i>
+                                            <div>Creation of a continuous training system for specialists</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <i class="fas fa-check-circle me-3 text-success"
+                                                style="font-size: 1.2rem;"></i>
+                                            <div>Introduction of innovative rehabilitation technologies</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <i class="fas fa-check-circle me-3 text-success"
+                                                style="font-size: 1.2rem;"></i>
+                                            <div>Development of scientific research in the field of rehabilitation</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <!-- Колонка 1: Документы и объявления -->
+                    <div class="col-lg-4 col-md-6 footer-col">
+                        <div class="footer-map-container">
+                            <div id="footer-map"></div>
+                        </div>
+                    </div>
+
+                    <!-- Колонка 2: Адрес -->
+                    <div class="col-lg-4 col-md-6 footer-col">
+                        <h4 class="footer-title">Adress</h4>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                Republic of Kazakhstan 010000, Astana city<br>
+                                Turan street 36
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Колонка 3: Контакты -->
+                    <div class="col-lg-4 col-md-6 footer-col">
+                        <h4 class="footer-title">Contacts</h4>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <strong>helpline number</strong><br>
+                                8 (7172) 248-245
+                                <br>
+                                87754327776
+
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <strong>Email Adress</strong><br>
+                                kense@nccr.kz
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Нижняя часть футера -->
+                <div class="footer-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            ©2025 Association of legal entities "National Association of Rehabilitation Centers "ONALTU"
+                        </div>
+                        <div class="col-md-6">
+                            <div class="footer-contacts">
+                                <a href="mailto:kense@nccr.kz">kense@nccr.kz </a>
+                                <a href="https://www.nccr.kz/">www.nccr.kz</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="to-top" id="toTop">↑</div>
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
