@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ассоциация ОҢАЛТУ</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script src="/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://mapgl.2gis.com/api/js/v1"></script>
+
+</head>
+
+<body>
+    <!-- Верхний бар -->
+    <div class="bg-white border-bottom py-2">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-telephone me-1"></i> <span class="me-3">
+                    8 (701) 218 9788</span>
+                <i class="bi bi-eye me-1"></i> <a href="#" class="me-3">Версия для слабовидящих</a>
+                <div class="dropdown">
+                    <button class="btn btn-outline-dark btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                        🌐 RU
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="../ru/about.html">Русский</a></li>
+                        <li><a class="dropdown-item" href="../kz/about.html">Қазақша</a></li>
+                        <li><a class="dropdown-item" href="../en/about.html">English</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Нижняя навигация -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <img src="/images/onaltu_logo.png" alt="ОНАЛТУ" height="128" class="me-2">
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link " href="index.html">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="membership.html">Членство</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <!-- Основной контент -->
+    <div class="about-container">
+        <div class="container">
+            <!-- ВСТУПЛЕНИЕ -->
+            <div class="intro-text mb-4">
+                <div class="history-image">
+                    <img src="/images/onaltumain.jpg" alt="main image" class="img-fluid">
+                </div>
+                <p class="lead mt-5 mb-5">
+                    Ассоциация «ОҢАЛТУ» объединяет реабилитационные центры по всей стране для совместной работы над
+                    стандартами качества, обучением специалистов и внедрением передовых международных практик.
+                </p>
+            </div>
+            <div class="container mb-5">
+                <div class="alert alert-info" role="alert">
+                    <h4 class="alert-heading">Президент Ассоциации</h4>
+                    <hr>
+                    <img src="/images/Azhar_Giniyat.jpg" alt="Azhar Giniyat" class="img mb-3"
+                        style="max-width: 600px; border-radius: 8px;">
+                    <p>Ажар Гиниятовна Гиният</p>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <!-- Боковое меню -->
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <h3 class="sidebar-title">О нас</h3>
+                        <ul class="sidebar-menu">
+                            <li><a href="#history" class="active">История создания</a></li>
+                            <li><a href="#rule">Органы управления</a></li>
+                            <li><a href="#workDirections">Основные направления в работе</a></li>
+                            <li><a href="#vision">Наше видение</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Контент страницы -->
+                <div class="col-lg-8">
+                    <div class="content-section">
+                        <h2 class="section-title" id="history">История создания</h2>
+
+                        <div class="content" style="padding-bottom: 25px;">
+                            <div class="text">
+                                <p>Наша ассоциация призвана стать экспериментальной площадкой, осуществляющей
+                                    разработку, мониторинг, исследование, анализ, апробацию, внедрение и реализацию
+                                    современных моделей реабилитационной помощи.</p>
+
+                                <p>Мы объединяем лучшие реабилитационные центры страны для создания единых стандартов
+                                    оказания медицинской помощи, основанных на передовых международных практиках.</p>
+                            </div>
+                        </div>
+                        <section class="governance-section"
+                            style="  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 10px;padding-top: 50px;">
+                            <div class="container">
+                                <h2 class="section-title mt -5" id="rule">ОРГАНЫ УПРАВЛЕНИЯ</h2>
+
+                                <div class="governance-container">
+                                    <div class="governance-structure">
+                                        <!-- Высший орган -->
+                                        <div class="governance-level">
+                                            <div class="governance-card">
+                                                <div class="card-icon">
+                                                    <i class="fas fa-users"></i>
+                                                </div>
+                                                <h3 class="card-title">Общее собрание</h3>
+                                                <div class="card-subtitle">Высший орган управления</div>
+                                                <div class="card-content mt-5">
+                                                    <p>Высший руководящий орган ассоциации, обладающий исключительной
+                                                        компетенцией в решении ключевых вопросов деятельности
+                                                        организации.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Высшее должностное лицо -->
+                                        <div class="governance-level">
+                                            <div class="governance-card">
+                                                <div class="card-icon">
+                                                    <i class="fas fa-user-tie"></i>
+                                                </div>
+                                                <h3 class="card-title">Президент Ассоциации</h3>
+                                                <div class="card-subtitle">Высшее должностное лицо</div>
+                                                <div class="card-content mt -5 ">
+                                                    <p>Избирается решением Общего собрания Ассоциации сроком на 5 (пять)
+                                                        лет. Осуществляет общее руководство деятельностью ассоциации и
+                                                        представляет ее интересы.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Контрольный орган -->
+                                        <div class="governance-level">
+                                            <div class="governance-card">
+                                                <div class="card-icon">
+                                                    <i class="fas fa-shield-alt"></i>
+                                                </div>
+                                                <h3 class="card-title">Контрольно-ревизионная комиссия</h3>
+                                                <div class="card-subtitle">Контрольный орган</div>
+                                                <div class="card-content mt-5">
+                                                    <p>Осуществляет контроль за финансово-хозяйственной деятельностью
+                                                        ассоциации, соблюдением уставных требований и исполнением
+                                                        решений Общего собрания.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="note-box">
+                                    <div class="note-title ">Норма представительства:</div>
+                                    <p class="mb-5">Каждый член Ассоциации имеет право на одного представителя с правом
+                                        одного голоса
+                                        в Общем собрании.</p>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="container">
+
+                            <div class="directions-container">
+                                <h2 class="section-title" id="workDirections">Профессиональная деятельность</h2>
+
+                                <!-- Направление 1 -->
+                                <div class="direction-item" id="specSynergy">
+                                    <div class="direction-number">1</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Привлечение ученых и специалистов</div>
+                                        <div class="direction-description">Объединение экспертов для решения актуальных
+                                            научных и практических задач, развитие профессиональных связей в области
+                                            медицинской реабилитации.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 2 -->
+                                <div class="direction-item" id="expCollective">
+                                    <div class="direction-number">2</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Обобщение профессионального опыта</div>
+                                        <div class="direction-description">Систематизация и распространение лучших
+                                            практик участников ассоциации для повышения качества реабилитационных услуг.
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 3 -->
+                                <div class="direction-item" id="proGuard">
+                                    <div class="direction-number">3</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Профессиональная защита участников</div>
+                                        <div class="direction-description">Обеспечение правовой и профессиональной
+                                            поддержки участников ассоциации, защита их интересов.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 4 -->
+                                <div class="direction-item" id="certGlobal">
+                                    <div class="direction-number">4</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Сертификация и аккредитация</div>
+                                        <div class="direction-description">Оказание услуг по сертификации
+                                            реабилитационных центров на соответствие национальным и международным
+                                            стандартам.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 5 -->
+                                <div class="direction-item" id="collabNet">
+                                    <div class="direction-number">5</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Взаимодействие и партнерство</div>
+                                        <div class="direction-description">Сотрудничество с организациями Казахстана для
+                                            защиты прав и интересов членов ассоциации.</div>
+
+                                    </div>
+                                </div>
+
+                                <h2 class="section-title mt-5">Образовательная и организационная деятельность</h2>
+
+                                <!-- Направление 6 -->
+                                <div class="direction-item" id="eventHub">
+                                    <div class="direction-number">6</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Проведение мероприятий</div>
+                                        <div class="direction-description">Организация семинаров, мастер-классов,
+                                            конференций, совещаний и выставок для обмена опытом.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 7 -->
+                                <div class="direction-item" id="expertAdvice">
+                                    <div class="direction-number">7</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Участие в экспертных советах</div>
+                                        <div class="direction-description">Участие в экспертных советах по направлениям,
+                                            связанным с реабилитацией.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 8 -->
+                                <div class="direction-item" id="eduSphere">
+                                    <div class="direction-number">8</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Образовательная деятельность</div>
+                                        <div class="direction-description">Организация и проведение образовательных
+                                            мероприятий по проблемам в сфере медицинской реабилитации.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 9 -->
+                                <div class="direction-item" id="globalConnect">
+                                    <div class="direction-number">9</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Международное сотрудничество</div>
+                                        <div class="direction-description">Развитие международного сотрудничества в
+                                            области медицинской реабилитологии и восстановительного лечения.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 10 -->
+                                <div class="direction-item" id="investProjects">
+                                    <div class="direction-number">10</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Участие в инвестиционных проектах</div>
+                                        <div class="direction-description">Участие в инвестиционных проектах,
+                                            направленных на развитие сферы реабилитации.</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Направление 11 -->
+                                <div class="direction-item" id="memberSupport">
+                                    <div class="direction-number">11</div>
+                                    <div class="direction-content">
+                                        <div class="direction-title">Поддержка членов ассоциации</div>
+                                        <div class="direction-description">Оказание организационной, информационной и
+                                            иной поддержки членам ассоциации.</div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-5">
+                                <h4 id="vision">Наше видение</h4>
+                                <p>Мы стремимся создать интегрированную систему реабилитационной помощи, которая
+                                    объединит
+                                    лучшие отечественные и международные практики, обеспечит доступность качественных
+                                    услуг
+                                    для всех жителей Казахстана и станет моделью для других стран региона.</p>
+
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <i class="fas fa-check-circle me-3 text-success"
+                                                style="font-size: 1.2rem;"></i>
+                                            <div>Разработка и внедрение единых стандартов качества</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <i class="fas fa-check-circle me-3 text-success"
+                                                style="font-size: 1.2rem;"></i>
+                                            <div>Создание непрерывной системы обучения специалистов</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <i class="fas fa-check-circle me-3 text-success"
+                                                style="font-size: 1.2rem;"></i>
+                                            <div>Внедрение инновационных технологий реабилитации</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <i class="fas fa-check-circle me-3 text-success"
+                                                style="font-size: 1.2rem;"></i>
+                                            <div>Развитие научных исследований в области реабилитологии</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <!-- Колонка 1: Документы и объявления -->
+                    <div class="col-lg-4 col-md-6 footer-col">
+                        <div class="footer-map-container">
+                            <div id="footer-map"></div>
+                        </div>
+                    </div>
+
+                    <!-- Колонка 2: Адрес -->
+                    <div class="col-lg-4 col-md-6 footer-col">
+                        <h4 class="footer-title">Адрес</h4>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                Республика Казахстан 010000, г. Астана<br>
+                                ул. Туран 36
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Колонка 3: Контакты -->
+                    <div class="col-lg-4 col-md-6 footer-col">
+                        <h4 class="footer-title">Контакты</h4>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <strong>Телефон доверия</strong><br>
+                                8 (7172) 248-245
+                                <br>
+                                8 (701) 218 9788
+
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <strong>Электронная почта</strong><br>
+                                onaltu.kory@gmail.com
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Нижняя часть футера -->
+                <div class="footer-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            ©2025 Объединение юридических лиц «Национальная Ассоциация Реабилитационных Центров «ОҢАЛТУ»
+                        </div>
+                        <div class="col-md-6">
+                            <div class="footer-contacts">
+                                <a href="mailto:onaltu.kory@gmail.com">onaltu.kory@gmail.com</a>
+                                <a href="https://www.nccr.kz/">www.nccr.kz</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="to-top" id="toTop">↑</div>
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

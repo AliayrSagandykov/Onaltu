@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ассоциация ОҢАЛТУ</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <script src="/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://mapgl.2gis.com/api/js/v1"></script>
+
+</head>
+
+<body>
+    <!-- Верхний бар -->
+    <div class="bg-white border-bottom py-2">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-telephone me-1"></i> <span class="me-3">
+                    8 (701) 218 9788</span>
+                <i class="bi bi-eye me-1"></i> <a href="#" class="me-3">Версия для слабовидящих</a>
+                <div class="dropdown">
+                    <button class="btn btn-outline-dark btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                        🌐 RU
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="../ru/index.html">Русский</a></li>
+                        <li><a class="dropdown-item" href="../kz/index.html">Қазақша</a></li>
+                        <li><a class="dropdown-item" href="../en/index.html">English</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Нижняя навигация -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <img src="/images/onaltu_logo.png" alt="ОНАЛТУ" height="128" class="me-2">
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="membership.html">Членство</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero секция -->
+    <section class="hero-section">
+        <!-- Облака -->
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Левая часть - текст -->
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Объединение реабилитационных центров - Оналту</h1>
+
+                        <p class="hero-description">
+                            Развитиe медицинской реабилитации и восстановительного лечения через
+                            стандартизацию,
+                            научное сотрудничество и международное партнёрство.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Правая часть - изображения -->
+                <div class="col-lg-6">
+                    <div class="image-container">
+                        <!-- Болванки для овальных изображений -->
+                        <img src="/images/ovalimg1.jpg" alt="" class="oval-img img-1">
+                        <img src="/images/ovalimg2.jpg" alt="" class="oval-img img-2">
+                        <img src="/images/ovalimg3.jpg" alt="" class="oval-img img-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-association py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" style="padding-right: 50PX;">
+                    <img src="/images/onaltumain.jpg" alt="Наша ассоциация" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="mb-4">Об ассоциации</h2>
+                    <p class="lead">Объединение юридических лиц «Национальная Ассоциация Реабилитационных Центров
+                        «ОҢАЛТУ»
+                        - это профессиональное сообщество,
+                        созданное для развития и совершенствования системы медицинской реабилитации в Казахстане.</p>
+                    <p>Мы объединяем ведущие реабилитационные центры страны, работаем над внедрением международных
+                        стандартов и создаем единое пространство для обмена опытом и профессионального роста
+                        специалистов.</p>
+                    <div class="mt-4">
+                        <a href="/ru/about.html" class="btn btn-primary me-2">Узнать больше</a>
+                        <a href="/ru/membership.html" class="btn btn-outline-primary">Вступить в ассоциацию</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners-carousel">
+        <h2 class="carousel-title">Центры Участники</h2>
+        <div class="carousel-container">
+            <div class="partners-track" id="partnersTrack">
+                <!-- Логотипы партнеров -->
+                <div class="partner-card">
+                    <img src="https://www.nccr.kz/images/banners/logo.png" alt="" class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="https://via.placeholder.com/200x100?text=Partner+5" alt="" class=" partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="/images/AqbulakNCCR.jpg" alt="" class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="https://altynshipager.kz/rehabilitation-conference/assets/img/favicon.png" alt=""
+                        class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="https://via.placeholder.com/200x100?text=Partner+5" alt="Партнер 5" class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="https://via.placeholder.com/200x100?text=Partner+6" alt="Партнер 6" class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="https://via.placeholder.com/200x100?text=Partner+7" alt="Партнер 7" class="partner-logo">
+                </div>
+                <div class="partner-card">
+                    <img src="https://via.placeholder.com/200x100?text=Partner+8" alt="Партнер 8" class="partner-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-section"><!-- Декоративные элементы -->
+        <div class="floating-element floating-1">
+            <i class="fas fa-bullseye"></i>
+        </div>
+        <div class="floating-element floating-2">
+            <i class="fas fa-hands-helping"></i>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title">МИССИЯ, ЦЕННОСТИ И ЦЕЛИ</h2>
+
+            <div class="row">
+                <!-- Миссия -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="mission-card">
+
+                        <h3 class="card-title">МИССИЯ</h3>
+                        <div class="card-content">
+                            <p>Объединение реабилитационных служб Республики Казахстан через стандарты лучших
+                                международных практик в оказании реабилитационной помощи.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ценности -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="mission-card">
+
+                        <h3 class="card-title">ЦЕННОСТИ</h3>
+                        <div class="card-content">
+
+                            <ul class="values-list">
+                                <li><i class="fas fa-lock-open me-2"></i> Открытость</li>
+                                <li><i class="fas fa-handshake me-2"></i> Сотрудничество</li>
+                                <li><i class="fas fa-balance-scale me-2"></i> Равноправие</li>
+                                <li><i class="fas fa-chart-line me-2"></i> Постоянное улучшение</li>
+                                <li><i class="fas fa-graduation-cap me-2"></i> Постоянное обучение</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Цели -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="mission-card">
+                        <h3 class="card-title">ЦЕЛИ</h3>
+                        <div class="card-content">
+                            <p>Координация, представление и защита общих, в том числе профессиональных интересов ее
+                                членов, координация и развитие медицинской реабилитации и восстановительного лечения
+                                детскому и взрослому населению Республики Казахстан.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mb-5">
+            <a href="/ru/about.html" class="btn btn-outline-primary" type="button">
+                Подробнее о нашей миссии
+            </a>
+
+
+        </div>
+
+
+    </section>
+
+    <section class="membership-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Преимущества членства</h2>
+                <p class="section-subtitle">Станьте частью профессионального сообщества и получите эксклюзивные
+                    возможности для развития</p>
+            </div>
+
+            <div class="benefits-row">
+                <!-- 1 -->
+                <div class="benefit-card">
+                    <div class="card-icon">🌐</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Профессиональная сеть</h3>
+                        <p class="card-description">Доступ к сообществу ведущих специалистов и реабилитационных центров
+                            Казахстана, возможность обмена опытом и совместных проектов.</p>
+                        <div class="card-highlight">Расширьте профессиональные связи</div>
+                    </div>
+                </div>
+
+                <!-- 2 -->
+                <div class="benefit-card">
+                    <div class="card-icon">🎓</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Образовательные программы</h3>
+                        <p class="card-description">Бесплатное участие в семинарах, тренингах и конференциях с ведущими
+                            международными экспертами в области реабилитации.</p>
+                        <div class="card-highlight">Повышайте квалификацию</div>
+                    </div>
+                </div>
+
+                <!-- 3 -->
+                <div class="benefit-card">
+                    <div class="card-icon">📘</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Методические материалы</h3>
+                        <p class="card-description">Эксклюзивный доступ к библиотеке протоколов, клинических
+                            рекомендаций и методических пособий по международным стандартам.</p>
+                        <div class="card-highlight">Внедряйте лучшие практики</div>
+                    </div>
+                </div>
+
+                <!-- 4 -->
+                <div class="benefit-card">
+                    <div class="card-icon">📜</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Сертификация</h3>
+                        <p class="card-description">Возможность получить сертификат соответствия международным
+                            стандартам качества оказания реабилитационной помощи.</p>
+                        <div class="card-highlight">Подтвердите свой уровень</div>
+                    </div>
+                </div>
+
+                <!-- 5 -->
+                <div class="benefit-card">
+                    <div class="card-icon">✈️</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Международные стажировки</h3>
+                        <p class="card-description">Участие в зарубежных образовательных программах и стажировках в
+                            ведущих реабилитационных центрах мира.</p>
+                        <div class="card-highlight">Перенимайте мировой опыт</div>
+                    </div>
+                </div>
+
+                <!-- 6 -->
+                <div class="benefit-card">
+                    <div class="card-icon">🤝</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Представительство интересов</h3>
+                        <p class="card-description">Защита ваших профессиональных интересов на государственном уровне и
+                            участие в разработке нормативных документов.</p>
+                        <div class="card-highlight">Влияйте на отрасль</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="mt-5 pt-4" style="padding: 100px 100px;">
+        <h3 class="text-center mb-4">Часто задаваемые вопросы</h3>
+        <div class="accordion" id="membershipFAQ">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#question1">
+                        Как вступить в ассоциацию?
+                    </button>
+                </h2>
+                <div id="question1" class="accordion-collapse collapse show" data-bs-parent="#membershipFAQ">
+                    <div class="accordion-body">
+                        Для вступления необходимо подать заявку через наш сайт, предоставить документы о регистрации
+                        вашей организации и пройти оценку соответствия базовым требованиям ассоциации.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#question2">
+                        Сколько стоит членство?
+                    </button>
+                </h2>
+                <div id="question2" class="accordion-collapse collapse" data-bs-parent="#membershipFAQ">
+                    <div class="accordion-body">
+                        Стоимость членства зависит от размера вашей организации и объема предоставляемых услуг. Мы
+                        предлагаем гибкую систему членских взносов, разработанную с учетом возможностей организаций
+                        разного масштаба.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#question3">
+                        Какие обязательства у членов ассоциации?
+                    </button>
+                </h2>
+                <div id="question3" class="accordion-collapse collapse" data-bs-parent="#membershipFAQ">
+                    <div class="accordion-body">
+                        Члены ассоциации обязуются соблюдать этический кодекс, участвовать в ежегодных общих собраниях,
+                        своевременно оплачивать членские взносы и стремиться к внедрению рекомендуемых стандартов
+                        качества.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Колонка 1: Документы и объявления -->
+                <div class="col-lg-4 col-md-6 footer-col">
+                    <div class="footer-map-container">
+                        <div id="footer-map"></div>
+                    </div>
+                </div>
+
+                <!-- Колонка 2: Адрес -->
+                <div class="col-lg-4 col-md-6 footer-col">
+                    <h4 class="footer-title">Адрес</h4>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            Республика Казахстан 010000, г. Астана<br>
+                            ул. Туран 36
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Колонка 3: Контакты -->
+                <div class="col-lg-4 col-md-6 footer-col">
+                    <h4 class="footer-title">Контакты</h4>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <strong>Телефон доверия</strong><br>
+                            8 (7172) 248-245
+                            <br>
+                            8 (701) 218 9788
+
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <strong>Электронная почта</strong><br>
+                            onaltu.kory@gmail.com
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Нижняя часть футера -->
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        ©2025 Объединение юридических лиц «Национальная Ассоциация Реабилитационных Центров «ОҢАЛТУ»
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-contacts">
+                            <a href="mailto:onaltu.kory@gmail.com">onaltu.kory@gmail.com</a>
+                            <a href="https://www.nccr.kz/">www.nccr.kz</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="to-top" id="toTop">↑</div>
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
