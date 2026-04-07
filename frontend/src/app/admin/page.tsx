@@ -63,6 +63,15 @@ export default async function AdminDashboard() {
             </div>
           </div>
 
+          {/* Admin users */}
+          <Link href="/admin/users" className="bg-white rounded-xl shadow-md p-8 hover:-translate-y-1 hover:shadow-lg transition-all group">
+            <div className="text-4xl text-orange-500 mb-4">
+              <i className="fas fa-users-cog" />
+            </div>
+            <h2 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-orange-600">Администраторы</h2>
+            <p className="text-gray-500">Добавление и удаление администраторов</p>
+          </Link>
+
           {/* Site link */}
           <Link href="/ru" className="bg-white rounded-xl shadow-md p-8 hover:-translate-y-1 hover:shadow-lg transition-all group">
             <div className="text-4xl text-purple-500 mb-4">
