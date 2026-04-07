@@ -100,15 +100,15 @@
   },
   "footer": {
     "addressTitle": "Address",
-    "addressLine1": "Astana, Mangilik El str., 8",
-    "addressLine2": "Business center \"Altyn Orda\", office 502",
+    "addressLine1": "Astana, Turan Ave., 36",
+    "addressLine2": "National Center of Child Rehabilitation",
     "contactsTitle": "Contacts",
     "phoneLabel": "Phone",
     "phone1": "8 (7172) 248-245",
     "phone2": "8 (701) 218 9788",
     "emailLabel": "Email",
     "email": "onaltu.kory@gmail.com",
-    "copyright": "©2025 Association of legal entities \"National Association of Rehabilitation Centers \"ONALTU\""
+    "copyright": "©2026 Association of legal entities \"National Association of Rehabilitation Centers \"ONALTU\""
   },
   "aboutPage": {
     "intro": "The Association of legal entities \"National Association of Rehabilitation Centers \"ONALTU\" was created to unite the efforts of organizations working in the field of medical rehabilitation and rehabilitation treatment in the Republic of Kazakhstan.",
@@ -278,7 +278,7 @@
       }
     ],
     "meta": {
-      "address": "Astana, Mangilik El str., 8, Business center \"Altyn Orda\", office 502",
+      "address": "Astana, Turan Ave., 36, National Center of Child Rehabilitation",
       "email": "onaltu.kory@gmail.com",
       "hours": "Mon-Fri: 9:00 AM - 6:00 PM"
     },
