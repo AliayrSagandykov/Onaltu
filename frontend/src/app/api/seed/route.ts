@@ -1,7 +1,15 @@
 import {prisma} from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 
+export async function GET() {
+  return createAdmin();
+}
+
 export async function POST() {
+  return createAdmin();
+}
+
+async function createAdmin() {
   const existingAdmin = await prisma.user.findUnique({
     where: {email: 'admin@onaltu.kz'},
   });
