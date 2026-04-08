@@ -1,4 +1,4 @@
-import {useTranslations} from 'next-intl';
+import {getTranslations} from 'next-intl/server';
 import {prisma} from '@/lib/prisma';
 import Link from 'next/link';
 import TopBar from '@/components/TopBar';
@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function NewsPage({params}: {params: Promise<{locale: string}>}) {
   const {locale} = await params;
-  const t = useTranslations('news');
+  const t = await getTranslations({locale, namespace: 'news'});
 
   let articles: Array<{id: string; slug: string; title: string; excerpt: string | null; createdAt: Date; imageUrl: string | null}> = [];
   try {
