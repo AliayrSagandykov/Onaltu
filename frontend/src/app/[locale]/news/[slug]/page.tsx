@@ -1,6 +1,6 @@
 import {prisma} from '@/lib/prisma';
 import {notFound} from 'next/navigation';
-import {useTranslations} from 'next-intl';
+import {getTranslations} from 'next-intl/server';
 import Link from 'next/link';
 import TopBar from '@/components/TopBar';
 import Navbar from '@/components/Navbar';
@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function ArticlePage({params}: {params: Promise<{locale: string; slug: string}>}) {
   const {locale, slug} = await params;
-  const t = useTranslations('news');
+  const t = await getTranslations({locale, namespace: 'news'});
 
   let article;
   try {
