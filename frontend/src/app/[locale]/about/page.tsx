@@ -6,6 +6,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import {getContent} from '@/lib/pageContent';
+import EditableText from '@/components/EditableText';
+import EditableImage from '@/components/EditableImage';
 
 export const dynamic = 'force-dynamic';
 
@@ -127,15 +129,15 @@ export default async function AboutPage({params}: {params: Promise<{locale: stri
             <div className="rounded-lg overflow-hidden shadow-lg mb-8 hover:scale-[1.02] transition-transform duration-500">
               <Image src="/images/onaltumain.jpg" alt="Main" width={1200} height={500} className="w-full" />
             </div>
-            <p className="text-lg leading-relaxed my-8">{intro}</p>
+            <EditableText contentKey="about.intro" locale={locale} value={intro} multiline className="text-lg leading-relaxed my-8" tag="p" />
           </div>
 
           {/* President */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
             <h4 className="text-xl font-bold text-blue-800 mb-3">{t('presidentTitle')}</h4>
             <hr className="mb-4" />
-            <Image src="/images/Azhar_Giniyat.jpg" alt="President" width={600} height={400} className="rounded-lg mb-3 max-w-[600px] w-full" />
-            <p className="text-gray-700">{presidentName}</p>
+            <EditableImage contentKey="about.presidentImage" locale={locale} src="/images/Azhar_Giniyat.jpg" alt="President" width={600} height={400} className="rounded-lg mb-3 max-w-[600px] w-full" />
+            <EditableText contentKey="about.presidentName" locale={locale} value={presidentName} className="text-gray-700" tag="p" />
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
@@ -166,8 +168,8 @@ export default async function AboutPage({params}: {params: Promise<{locale: stri
                 {t('historyTitle')}
               </h2>
               <div className="pb-6">
-                <p className="mb-4">{historyText1}</p>
-                <p>{historyText2}</p>
+                <EditableText contentKey="about.historyText1" locale={locale} value={historyText1} multiline className="mb-4" tag="p" />
+                <EditableText contentKey="about.historyText2" locale={locale} value={historyText2} multiline tag="p" />
               </div>
 
               <Governance />
