@@ -2,6 +2,9 @@ import {NextIntlClientProvider} from 'next-intl';
 import {routing} from '@/i18n/routing';
 import {notFound} from 'next/navigation';
 import "../globals.css";
+import SessionProvider from '@/components/SessionProvider';
+import {EditModeProvider} from '@/context/EditModeContext';
+import EditModeBar from '@/components/EditModeBar';
 
 export default async function LocaleLayout({
   children,
@@ -36,9 +39,16 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col" style={{fontFamily: '"Segoe UI", sans-serif'}}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <SessionProvider>
+          <EditModeProvider>
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              <EditModeBar />
+              <div id="page-content">
+                {children}
+              </div>
+            </NextIntlClientProvider>
+          </EditModeProvider>
+        </SessionProvider>
       </body>
     </html>
   );
