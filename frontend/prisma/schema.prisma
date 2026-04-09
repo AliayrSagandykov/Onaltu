@@ -16,6 +16,16 @@ model User {
   createdAt DateTime @default(now())
 }
 
+model PageContent {
+  id        String   @id @default(cuid())
+  key       String
+  locale    String   @default("ru")
+  value     String
+  updatedAt DateTime @updatedAt
+
+  @@unique([key, locale])
+}
+
 model Article {
   id          String   @id @default(cuid())
   slug        String   @unique

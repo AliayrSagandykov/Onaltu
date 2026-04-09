@@ -1,9 +1,13 @@
 import {useTranslations} from 'next-intl';
+import {getTranslations} from 'next-intl/server';
 import Image from 'next/image';
 import TopBar from '@/components/TopBar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import {getContent} from '@/lib/pageContent';
+
+export const dynamic = 'force-dynamic';
 
 function Governance() {
   const t = useTranslations('aboutPage');
@@ -98,10 +102,18 @@ function Vision() {
   );
 }
 
-export default function AboutPage() {
-  const t = useTranslations('aboutPage');
+export default async function AboutPage({params}: {params: Promise<{locale: string}>}) {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: 'aboutPage'});
   const sidebarLinks: string[] = t.raw('sidebarLinks');
   const anchors = ['#history', '#rule', '#workDirections', '#vision'];
+
+  const [intro, presidentName, historyText1, historyText2] = await Promise.all([
+    getContent('about.intro', locale, t('intro')),
+    getContent('about.presidentName', locale, t('presidentName')),
+    getContent('about.historyText1', locale, t('historyText1')),
+    getContent('about.historyText2', locale, t('historyText2')),
+  ]);
 
   return (
     <>
@@ -115,7 +127,7 @@ export default function AboutPage() {
             <div className="rounded-lg overflow-hidden shadow-lg mb-8 hover:scale-[1.02] transition-transform duration-500">
               <Image src="/images/onaltumain.jpg" alt="Main" width={1200} height={500} className="w-full" />
             </div>
-            <p className="text-lg leading-relaxed my-8">{t('intro')}</p>
+            <p className="text-lg leading-relaxed my-8">{intro}</p>
           </div>
 
           {/* President */}
@@ -123,7 +135,7 @@ export default function AboutPage() {
             <h4 className="text-xl font-bold text-blue-800 mb-3">{t('presidentTitle')}</h4>
             <hr className="mb-4" />
             <Image src="/images/Azhar_Giniyat.jpg" alt="President" width={600} height={400} className="rounded-lg mb-3 max-w-[600px] w-full" />
-            <p className="text-gray-700">{t('presidentName')}</p>
+            <p className="text-gray-700">{presidentName}</p>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
@@ -154,8 +166,8 @@ export default function AboutPage() {
                 {t('historyTitle')}
               </h2>
               <div className="pb-6">
-                <p className="mb-4">{t('historyText1')}</p>
-                <p>{t('historyText2')}</p>
+                <p className="mb-4">{historyText1}</p>
+                <p>{historyText2}</p>
               </div>
 
               <Governance />

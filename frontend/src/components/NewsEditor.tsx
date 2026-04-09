@@ -1,6 +1,7 @@
 'use client';
 
 import {useState} from 'react';
+import RichTextEditor from './RichTextEditor';
 
 interface Article {
   id: string;
@@ -87,13 +88,8 @@ export default function NewsEditor({article, onSave, onCancel}: Props) {
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">Содержание (HTML)</label>
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 min-h-[300px] font-mono text-sm"
-          required
-        />
+        <label className="block text-sm font-semibold text-gray-700 mb-2">Содержание</label>
+        <RichTextEditor content={content} onChange={setContent} />
       </div>
 
       <div className="flex items-center gap-3">
