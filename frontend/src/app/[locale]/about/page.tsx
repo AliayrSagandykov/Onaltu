@@ -1,11 +1,10 @@
 import {useTranslations} from 'next-intl';
 import {getTranslations} from 'next-intl/server';
-import Image from 'next/image';
 import TopBar from '@/components/TopBar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
-import {getContent} from '@/lib/pageContent';
+import {getContents} from '@/lib/pageContent';
 import EditableText from '@/components/EditableText';
 import EditableImage from '@/components/EditableImage';
 
@@ -110,12 +109,24 @@ export default async function AboutPage({params}: {params: Promise<{locale: stri
   const sidebarLinks: string[] = t.raw('sidebarLinks');
   const anchors = ['#history', '#rule', '#workDirections', '#vision'];
 
-  const [intro, presidentName, historyText1, historyText2] = await Promise.all([
-    getContent('about.intro', locale, t('intro')),
-    getContent('about.presidentName', locale, t('presidentName')),
-    getContent('about.historyText1', locale, t('historyText1')),
-    getContent('about.historyText2', locale, t('historyText2')),
-  ]);
+  const aboutContent = await getContents(
+    ['about.intro', 'about.presidentName', 'about.historyText1', 'about.historyText2', 'about.mainImage', 'about.presidentImage'],
+    locale,
+    {
+      'about.intro': t('intro'),
+      'about.presidentName': t('presidentName'),
+      'about.historyText1': t('historyText1'),
+      'about.historyText2': t('historyText2'),
+      'about.mainImage': '/images/onaltumain.jpg',
+      'about.presidentImage': '/images/Azhar_Giniyat.jpg',
+    }
+  );
+  const {
+    'about.intro': intro,
+    'about.presidentName': presidentName,
+    'about.historyText1': historyText1,
+    'about.historyText2': historyText2,
+  } = aboutContent;
 
   return (
     <>
@@ -127,7 +138,7 @@ export default async function AboutPage({params}: {params: Promise<{locale: stri
           {/* Intro */}
           <div className="mb-8">
             <div className="rounded-lg overflow-hidden shadow-lg mb-8 hover:scale-[1.02] transition-transform duration-500">
-              <Image src="/images/onaltumain.jpg" alt="Main" width={1200} height={500} className="w-full" />
+              <EditableImage contentKey="about.mainImage" locale={locale} src={aboutContent['about.mainImage']} alt="Main" width={1200} height={500} className="w-full" />
             </div>
             <EditableText contentKey="about.intro" locale={locale} value={intro} multiline className="text-lg leading-relaxed my-8" tag="p" />
           </div>
@@ -136,7 +147,7 @@ export default async function AboutPage({params}: {params: Promise<{locale: stri
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
             <h4 className="text-xl font-bold text-blue-800 mb-3">{t('presidentTitle')}</h4>
             <hr className="mb-4" />
-            <EditableImage contentKey="about.presidentImage" locale={locale} src="/images/Azhar_Giniyat.jpg" alt="President" width={600} height={400} className="rounded-lg mb-3 max-w-[600px] w-full" />
+            <EditableImage contentKey="about.presidentImage" locale={locale} src={aboutContent['about.presidentImage']} alt="President" width={600} height={400} className="rounded-lg mb-3 max-w-[600px] w-full" />
             <EditableText contentKey="about.presidentName" locale={locale} value={presidentName} className="text-gray-700" tag="p" />
           </div>
 

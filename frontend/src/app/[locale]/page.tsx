@@ -1,18 +1,29 @@
 import {useTranslations} from 'next-intl';
 import {getTranslations} from 'next-intl/server';
-import Image from 'next/image';
 import TopBar from '@/components/TopBar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
-import PartnersCarousel from '@/components/PartnersCarousel';
+import PartnersCarousel, {type PartnerItem} from '@/components/PartnersCarousel';
 import Link from 'next/link';
 import {getContents} from '@/lib/pageContent';
 import EditableText from '@/components/EditableText';
+import EditableImage from '@/components/EditableImage';
 
 export const dynamic = 'force-dynamic';
 
 type C = Record<string, string>;
+
+const DEFAULT_PARTNERS: PartnerItem[] = [
+  {src: 'https://www.nccr.kz/images/banners/logo.png', alt: 'NCCR'},
+  {src: '/images/AqbulakNCCR.jpg', alt: 'Aqbulak'},
+  {src: 'https://altynshipager.kz/rehabilitation-conference/assets/img/favicon.png', alt: 'Altyn Shipager'},
+  {src: 'https://via.placeholder.com/200x100?text=Partner+4', alt: 'Partner 4'},
+  {src: 'https://via.placeholder.com/200x100?text=Partner+5', alt: 'Partner 5'},
+  {src: 'https://via.placeholder.com/200x100?text=Partner+6', alt: 'Partner 6'},
+  {src: 'https://via.placeholder.com/200x100?text=Partner+7', alt: 'Partner 7'},
+  {src: 'https://via.placeholder.com/200x100?text=Partner+8', alt: 'Partner 8'},
+];
 
 function HeroSection({locale, c}: {locale: string; c: C}) {
   return (
@@ -29,12 +40,18 @@ function HeroSection({locale, c}: {locale: string; c: C}) {
             <EditableText contentKey="hero.description" locale={locale} value={c['hero.description']} multiline tag="p" className="text-xl leading-relaxed text-gray-700 max-w-[90%]" />
           </div>
           <div className="lg:w-1/2 relative min-h-[450px] -mt-16">
-            <Image src="/images/ovalimg1.jpg" alt="" width={300} height={300}
-              className="absolute rounded-full border-[5px] border-white shadow-lg object-cover w-[300px] h-[300px] top-[10%] right-[10%] z-10 hover:scale-105 transition-transform duration-500" />
-            <Image src="/images/ovalimg2.jpg" alt="" width={270} height={270}
-              className="absolute rounded-full border-[5px] border-white shadow-lg object-cover w-[270px] h-[270px] top-[45%] right-[30%] z-[11] hover:scale-105 transition-transform duration-500" />
-            <Image src="/images/ovalimg3.jpg" alt="" width={240} height={240}
-              className="absolute rounded-full border-[5px] border-white shadow-lg object-cover w-[240px] h-[240px] top-[20%] right-0 z-[12] hover:scale-105 transition-transform duration-500" />
+            <div className="absolute top-[10%] right-[10%] z-10">
+              <EditableImage contentKey="hero.img1" locale={locale} src={c['hero.img1']} alt="" width={300} height={300}
+                className="rounded-full border-[5px] border-white shadow-lg object-cover w-[300px] h-[300px] hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="absolute top-[45%] right-[30%] z-[11]">
+              <EditableImage contentKey="hero.img2" locale={locale} src={c['hero.img2']} alt="" width={270} height={270}
+                className="rounded-full border-[5px] border-white shadow-lg object-cover w-[270px] h-[270px] hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="absolute top-[20%] right-0 z-[12]">
+              <EditableImage contentKey="hero.img3" locale={locale} src={c['hero.img3']} alt="" width={240} height={240}
+                className="rounded-full border-[5px] border-white shadow-lg object-cover w-[240px] h-[240px] hover:scale-105 transition-transform duration-500" />
+            </div>
           </div>
         </div>
       </div>
@@ -49,7 +66,7 @@ function AboutSection({locale, c}: {locale: string; c: C}) {
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2 lg:pr-12">
-            <Image src="/images/onaltumain.jpg" alt="Association" width={600} height={400}
+            <EditableImage contentKey="aboutSection.img" locale={locale} src={c['aboutSection.img']} alt="Association" width={600} height={400}
               className="rounded-lg shadow-lg w-full" />
           </div>
           <div className="lg:w-1/2">
@@ -89,13 +106,11 @@ function MissionSection({locale, c}: {locale: string; c: C}) {
         <EditableText contentKey="mission.sectionTitle" locale={locale} value={c['mission.sectionTitle']} tag="h2" className="text-4xl font-bold text-center text-[#2c3e50] mb-10 -mt-10 section-title-underline centered" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Mission */}
           <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#3498db] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
             <EditableText contentKey="mission.missionTitle" locale={locale} value={c['mission.missionTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
             <EditableText contentKey="mission.missionText" locale={locale} value={c['mission.missionText']} multiline tag="p" className="text-lg leading-relaxed text-[#34495e]" />
           </div>
 
-          {/* Values */}
           <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#e74c3c] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
             <EditableText contentKey="mission.valuesTitle" locale={locale} value={c['mission.valuesTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
             <ul className="values-list">
@@ -105,7 +120,6 @@ function MissionSection({locale, c}: {locale: string; c: C}) {
             </ul>
           </div>
 
-          {/* Goals */}
           <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#27ae60] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
             <EditableText contentKey="mission.goalsTitle" locale={locale} value={c['mission.goalsTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
             <EditableText contentKey="mission.goalsText" locale={locale} value={c['mission.goalsText']} multiline tag="p" className="text-lg leading-relaxed text-[#34495e]" />
@@ -177,30 +191,49 @@ function FAQSection({locale, c}: {locale: string; c: C}) {
 export default async function HomePage({params}: {params: Promise<{locale: string}>}) {
   const {locale} = await params;
 
-  const [heroT, aboutT, missionT, membershipT, faqT] = await Promise.all([
+  const [heroT, aboutT, missionT, membershipT, faqT, partnersT] = await Promise.all([
     getTranslations({locale, namespace: 'hero'}),
     getTranslations({locale, namespace: 'aboutSection'}),
     getTranslations({locale, namespace: 'mission'}),
     getTranslations({locale, namespace: 'membership'}),
     getTranslations({locale, namespace: 'faq'}),
+    getTranslations({locale, namespace: 'partners'}),
   ]);
+
+  // Build partner keys for DB fetch
+  const partnerKeys = DEFAULT_PARTNERS.flatMap((p, i) => [
+    `partners.${i}.src`,
+    `partners.${i}.alt`,
+  ]);
+  const partnerFallbacks = DEFAULT_PARTNERS.reduce<Record<string, string>>((acc, p, i) => {
+    acc[`partners.${i}.src`] = p.src;
+    acc[`partners.${i}.alt`] = p.alt;
+    return acc;
+  }, {});
 
   const c = await getContents(
     [
       'hero.title', 'hero.description',
-      'aboutSection.title', 'aboutSection.lead', 'aboutSection.body',
+      'hero.img1', 'hero.img2', 'hero.img3',
+      'aboutSection.title', 'aboutSection.lead', 'aboutSection.body', 'aboutSection.img',
       'mission.sectionTitle', 'mission.missionTitle', 'mission.missionText',
       'mission.valuesTitle', 'mission.goalsTitle', 'mission.goalsText',
       'membership.sectionTitle', 'membership.subtitle',
       'faq.title',
+      'partners.title',
+      ...partnerKeys,
     ],
     locale,
     {
       'hero.title': heroT('title'),
       'hero.description': heroT('description'),
+      'hero.img1': '/images/ovalimg1.jpg',
+      'hero.img2': '/images/ovalimg2.jpg',
+      'hero.img3': '/images/ovalimg3.jpg',
       'aboutSection.title': aboutT('title'),
       'aboutSection.lead': aboutT('lead'),
       'aboutSection.body': aboutT('body'),
+      'aboutSection.img': '/images/onaltumain.jpg',
       'mission.sectionTitle': missionT('sectionTitle'),
       'mission.missionTitle': missionT('missionTitle'),
       'mission.missionText': missionT('missionText'),
@@ -210,8 +243,16 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       'membership.sectionTitle': membershipT('sectionTitle'),
       'membership.subtitle': membershipT('subtitle'),
       'faq.title': faqT('title'),
+      'partners.title': partnersT('title'),
+      ...partnerFallbacks,
     }
   );
+
+  // Build resolved partners list from DB content
+  const partners: PartnerItem[] = DEFAULT_PARTNERS.map((p, i) => ({
+    src: c[`partners.${i}.src`] ?? p.src,
+    alt: c[`partners.${i}.alt`] ?? p.alt,
+  }));
 
   return (
     <>
@@ -219,7 +260,7 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       <Navbar />
       <HeroSection locale={locale} c={c} />
       <AboutSection locale={locale} c={c} />
-      <PartnersCarousel />
+      <PartnersCarousel locale={locale} titleValue={c['partners.title']} partners={partners} />
       <MissionSection locale={locale} c={c} />
       <MembershipSection locale={locale} c={c} />
       <FAQSection locale={locale} c={c} />
