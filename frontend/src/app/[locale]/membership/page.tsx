@@ -20,13 +20,22 @@ export default async function MembershipPage({params}: {params: Promise<{locale:
   const textColors = ['text-blue-600', 'text-green-600', 'text-cyan-500'];
   const benefitIcons = ['fa-chalkboard-teacher', 'fa-comments', 'fa-chart-line'];
 
+  const stepKeys = steps.flatMap((_, i) => [`membershipPage.step.${i}.title`, `membershipPage.step.${i}.description`]);
+  const stepFallbacks = steps.reduce<Record<string, string>>((acc, s, i) => {
+    acc[`membershipPage.step.${i}.title`] = s.title;
+    acc[`membershipPage.step.${i}.description`] = s.description;
+    return acc;
+  }, {});
+
   const c = await getContents(
     [
       'membershipPage.associationName', 'membershipPage.title', 'membershipPage.subtitle',
       'membershipPage.howToJoinTitle', 'membershipPage.howToJoinSubtitle',
+      'membershipPage.filesTitle',
       'membershipPage.benefit.0.title', 'membershipPage.benefit.0.description',
       'membershipPage.benefit.1.title', 'membershipPage.benefit.1.description',
       'membershipPage.benefit.2.title', 'membershipPage.benefit.2.description',
+      ...stepKeys,
     ],
     locale,
     {
@@ -35,12 +44,14 @@ export default async function MembershipPage({params}: {params: Promise<{locale:
       'membershipPage.subtitle': t('subtitle'),
       'membershipPage.howToJoinTitle': t('howToJoinTitle'),
       'membershipPage.howToJoinSubtitle': t('howToJoinSubtitle'),
+      'membershipPage.filesTitle': t('filesTitle'),
       'membershipPage.benefit.0.title': benefits[0]?.title ?? '',
       'membershipPage.benefit.0.description': benefits[0]?.description ?? '',
       'membershipPage.benefit.1.title': benefits[1]?.title ?? '',
       'membershipPage.benefit.1.description': benefits[1]?.description ?? '',
       'membershipPage.benefit.2.title': benefits[2]?.title ?? '',
       'membershipPage.benefit.2.description': benefits[2]?.description ?? '',
+      ...stepFallbacks,
     }
   );
 
@@ -98,8 +109,8 @@ export default async function MembershipPage({params}: {params: Promise<{locale:
                 {i + 1}
               </div>
               <div className="pt-3 flex-grow">
-                <h2 className="text-xl font-semibold text-[#2a5298] mb-4">{step.title}</h2>
-                <p className="text-gray-600">{step.description}</p>
+                <EditableText contentKey={`membershipPage.step.${i}.title`} locale={locale} value={c[`membershipPage.step.${i}.title`] ?? step.title} tag="h2" className="text-xl font-semibold text-[#2a5298] mb-4" />
+                <EditableText contentKey={`membershipPage.step.${i}.description`} locale={locale} value={c[`membershipPage.step.${i}.description`] ?? step.description} multiline tag="p" className="text-gray-600" />
                 {step.details && (
                   <div className="step-details bg-gray-50 rounded-lg p-5 mt-4 border-l-[3px] border-[#1a6aa2]">
                     {step.details.map((d, j) => (
@@ -116,7 +127,7 @@ export default async function MembershipPage({params}: {params: Promise<{locale:
         {/* Files */}
         <div className="mt-8 border border-gray-200 rounded-lg overflow-hidden">
           <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-            <h5 className="text-lg font-semibold">{t('filesTitle')}</h5>
+            <EditableText contentKey="membershipPage.filesTitle" locale={locale} value={c['membershipPage.filesTitle']} tag="h5" className="text-lg font-semibold" />
           </div>
           <div className="p-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

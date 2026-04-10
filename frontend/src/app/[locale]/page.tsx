@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import PartnersCarousel, {type PartnerItem} from '@/components/PartnersCarousel';
+import FAQSection from '@/components/FAQSection';
 import Link from 'next/link';
 import {getContents} from '@/lib/pageContent';
 import EditableText from '@/components/EditableText';
@@ -94,7 +95,7 @@ function MissionSection({locale, c}: {locale: string; c: C}) {
   const values: string[] = t.raw('values');
 
   return (
-    <section className="py-6 bg-gradient-to-br from-gray-50 to-gray-200 relative overflow-hidden min-h-[90vh]">
+    <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-200 relative overflow-hidden min-h-[90vh]">
       <div className="absolute top-[10%] left-[5%] opacity-5 text-[10rem] rotate-[15deg]">
         <i className="fas fa-bullseye" />
       </div>
@@ -103,23 +104,34 @@ function MissionSection({locale, c}: {locale: string; c: C}) {
       </div>
 
       <div className="container mx-auto px-4">
-        <EditableText contentKey="mission.sectionTitle" locale={locale} value={c['mission.sectionTitle']} tag="h2" className="text-4xl font-bold text-center text-[#2c3e50] mb-10 -mt-10 section-title-underline centered" />
+        <EditableText contentKey="mission.sectionTitle" locale={locale} value={c['mission.sectionTitle']} tag="h2" className="text-4xl font-bold text-center text-[#2c3e50] mb-10 section-title-underline centered" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Mission */}
           <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#3498db] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
             <EditableText contentKey="mission.missionTitle" locale={locale} value={c['mission.missionTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
             <EditableText contentKey="mission.missionText" locale={locale} value={c['mission.missionText']} multiline tag="p" className="text-lg leading-relaxed text-[#34495e]" />
           </div>
 
+          {/* Values */}
           <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#e74c3c] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
             <EditableText contentKey="mission.valuesTitle" locale={locale} value={c['mission.valuesTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
             <ul className="values-list">
               {values.map((v: string, i: number) => (
-                <li key={i}><i className={`fas ${icons[i]} mr-2`} /> {v}</li>
+                <li key={i}>
+                  <i className={`fas ${icons[i]} mr-2`} />
+                  <EditableText
+                    contentKey={`mission.value.${i}`}
+                    locale={locale}
+                    value={c[`mission.value.${i}`] ?? v}
+                    tag="span"
+                  />
+                </li>
               ))}
             </ul>
           </div>
 
+          {/* Goals */}
           <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#27ae60] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
             <EditableText contentKey="mission.goalsTitle" locale={locale} value={c['mission.goalsTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
             <EditableText contentKey="mission.goalsText" locale={locale} value={c['mission.goalsText']} multiline tag="p" className="text-lg leading-relaxed text-[#34495e]" />
@@ -151,38 +163,32 @@ function MembershipSection({locale, c}: {locale: string; c: C}) {
             <div key={i} className="bg-gray-100 rounded-2xl flex-1 basis-[calc(33%-30px)] max-w-[calc(33%-30px)] flex flex-col transition-all duration-400 hover:-translate-y-2.5 hover:shadow-xl min-w-[280px]">
               <div className="text-5xl mx-auto mt-8 mb-5">{b.icon}</div>
               <div className="px-8 pb-8 text-center flex-grow flex flex-col">
-                <h3 className="text-xl font-bold mb-4 text-[#2c3e50] min-h-[60px]">{b.title}</h3>
-                <p className="text-lg leading-relaxed text-gray-600 mb-5">{b.description}</p>
-                <div className="mt-auto py-2.5 px-4 bg-gray-50 rounded-lg font-medium text-blue-600">
-                  {b.highlight}
-                </div>
+                <EditableText
+                  contentKey={`membership.benefit.${i}.title`}
+                  locale={locale}
+                  value={c[`membership.benefit.${i}.title`] ?? b.title}
+                  tag="h3"
+                  className="text-xl font-bold mb-4 text-[#2c3e50] min-h-[60px]"
+                />
+                <EditableText
+                  contentKey={`membership.benefit.${i}.description`}
+                  locale={locale}
+                  value={c[`membership.benefit.${i}.description`] ?? b.description}
+                  multiline
+                  tag="p"
+                  className="text-lg leading-relaxed text-gray-600 mb-5"
+                />
+                <EditableText
+                  contentKey={`membership.benefit.${i}.highlight`}
+                  locale={locale}
+                  value={c[`membership.benefit.${i}.highlight`] ?? b.highlight}
+                  tag="div"
+                  className="mt-auto py-2.5 px-4 bg-gray-50 rounded-lg font-medium text-blue-600"
+                />
               </div>
             </div>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function FAQSection({locale, c}: {locale: string; c: C}) {
-  const t = useTranslations('faq');
-  const items: Array<{question: string; answer: string}> = t.raw('items');
-
-  return (
-    <section className="py-12 px-4 md:px-24">
-      <EditableText contentKey="faq.title" locale={locale} value={c['faq.title']} tag="h3" className="text-2xl font-bold text-center mb-8" />
-      <div className="max-w-4xl mx-auto space-y-4">
-        {items.map((item, i) => (
-          <details key={i} className="border border-gray-200 rounded-lg" open={i === 0}>
-            <summary className="px-6 py-4 cursor-pointer font-medium text-lg hover:bg-gray-50 transition-colors">
-              {item.question}
-            </summary>
-            <div className="px-6 pb-4 text-gray-600 leading-relaxed">
-              {item.answer}
-            </div>
-          </details>
-        ))}
       </div>
     </section>
   );
@@ -200,14 +206,36 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
     getTranslations({locale, namespace: 'partners'}),
   ]);
 
-  // Build partner keys for DB fetch
-  const partnerKeys = DEFAULT_PARTNERS.flatMap((p, i) => [
-    `partners.${i}.src`,
-    `partners.${i}.alt`,
-  ]);
+  const missionValues: string[] = missionT.raw('values');
+  const membershipBenefits: Array<{title: string; description: string; highlight: string}> = membershipT.raw('benefits');
+  const faqItems: Array<{question: string; answer: string}> = faqT.raw('items');
+
+  const partnerKeys = DEFAULT_PARTNERS.flatMap((_, i) => [`partners.${i}.src`, `partners.${i}.alt`]);
   const partnerFallbacks = DEFAULT_PARTNERS.reduce<Record<string, string>>((acc, p, i) => {
     acc[`partners.${i}.src`] = p.src;
     acc[`partners.${i}.alt`] = p.alt;
+    return acc;
+  }, {});
+
+  const valueKeys = missionValues.map((_, i) => `mission.value.${i}`);
+  const valueFallbacks = missionValues.reduce<Record<string, string>>((acc, v, i) => { acc[`mission.value.${i}`] = v; return acc; }, {});
+
+  const benefitKeys = membershipBenefits.flatMap((_, i) => [
+    `membership.benefit.${i}.title`,
+    `membership.benefit.${i}.description`,
+    `membership.benefit.${i}.highlight`,
+  ]);
+  const benefitFallbacks = membershipBenefits.reduce<Record<string, string>>((acc, b, i) => {
+    acc[`membership.benefit.${i}.title`] = b.title;
+    acc[`membership.benefit.${i}.description`] = b.description;
+    acc[`membership.benefit.${i}.highlight`] = b.highlight;
+    return acc;
+  }, {});
+
+  const faqKeys = faqItems.flatMap((_, i) => [`faq.item.${i}.question`, `faq.item.${i}.answer`]);
+  const faqFallbacks = faqItems.reduce<Record<string, string>>((acc, item, i) => {
+    acc[`faq.item.${i}.question`] = item.question;
+    acc[`faq.item.${i}.answer`] = item.answer;
     return acc;
   }, {});
 
@@ -222,6 +250,9 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       'faq.title',
       'partners.title',
       ...partnerKeys,
+      ...valueKeys,
+      ...benefitKeys,
+      ...faqKeys,
     ],
     locale,
     {
@@ -245,10 +276,12 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       'faq.title': faqT('title'),
       'partners.title': partnersT('title'),
       ...partnerFallbacks,
+      ...valueFallbacks,
+      ...benefitFallbacks,
+      ...faqFallbacks,
     }
   );
 
-  // Build resolved partners list from DB content
   const partners: PartnerItem[] = DEFAULT_PARTNERS.map((p, i) => ({
     src: c[`partners.${i}.src`] ?? p.src,
     alt: c[`partners.${i}.alt`] ?? p.alt,

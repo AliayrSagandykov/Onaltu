@@ -31,6 +31,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
+        <link rel="icon" type="image/png" href="/images/onaltu_logo.png" />
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
           rel="stylesheet"
