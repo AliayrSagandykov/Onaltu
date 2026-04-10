@@ -9,10 +9,11 @@ interface Props {
   value: string;
   className?: string;
   multiline?: boolean;
-  tag?: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'span' | 'div';
+  tag?: 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+  id?: string;
 }
 
-export default function EditableText({contentKey, locale, value: initialValue, className = '', multiline = false, tag: Tag = 'p'}: Props) {
+export default function EditableText({contentKey, locale, value: initialValue, className = '', multiline = false, tag: Tag = 'p', id}: Props) {
   const {editMode} = useEditMode();
   const [value, setValue] = useState(initialValue);
   const [editing, setEditing] = useState(false);
@@ -45,7 +46,7 @@ export default function EditableText({contentKey, locale, value: initialValue, c
   };
 
   if (!editMode) {
-    return <Tag className={className}>{value}</Tag>;
+    return <Tag className={className} id={id}>{value}</Tag>;
   }
 
   if (editing) {
@@ -84,6 +85,7 @@ export default function EditableText({contentKey, locale, value: initialValue, c
     <Tag
       className={`${className} relative outline-2 outline-dashed outline-blue-400 outline-offset-2 cursor-pointer hover:outline-blue-600 hover:bg-blue-50/30 rounded transition-all group`}
       onClick={() => setEditing(true)}
+      id={id}
     >
       {value}
       <span className="absolute -top-7 left-0 bg-blue-600 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
