@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "ONALTU - Национальная Ассоциация Реабилитационных Центров",
   description: "Объединение реабилитационных центров Казахстана",
+  icons: {
+    icon: '/images/onaltu_logo.png',
+    shortcut: '/images/onaltu_logo.png',
+  },
 };
 
 export default function RootLayout({
