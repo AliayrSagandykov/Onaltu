@@ -1,8 +1,5 @@
 import {prisma} from './prisma';
 
-/**
- * Get a page content value from DB, falling back to the provided default.
- */
 export async function getContent(key: string, locale: string, fallback: string): Promise<string> {
   try {
     const item = await prisma.pageContent.findUnique({
@@ -13,4 +10,23 @@ export async function getContent(key: string, locale: string, fallback: string):
     // DB not ready
   }
   return fallback;
+}
+
+export async function getContents(
+  keys: string[],
+  locale: string,
+  fallbacks: Record<string, string>
+): Promise<Record<string, string>> {
+  const result: Record<string, string> = {...fallbacks};
+  try {
+    const items = await prisma.pageContent.findMany({
+      where: {locale, key: {in: keys}},
+    });
+    for (const item of items) {
+      if (item.value) result[item.key] = item.value;
+    }
+  } catch {
+    // DB not ready
+  }
+  return result;
 }

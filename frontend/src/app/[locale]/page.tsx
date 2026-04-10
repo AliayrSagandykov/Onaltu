@@ -1,4 +1,5 @@
 import {useTranslations} from 'next-intl';
+import {getTranslations} from 'next-intl/server';
 import Image from 'next/image';
 import TopBar from '@/components/TopBar';
 import Navbar from '@/components/Navbar';
@@ -6,9 +7,14 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import PartnersCarousel from '@/components/PartnersCarousel';
 import Link from 'next/link';
+import {getContents} from '@/lib/pageContent';
+import EditableText from '@/components/EditableText';
 
-function HeroSection() {
-  const t = useTranslations('hero');
+export const dynamic = 'force-dynamic';
+
+type C = Record<string, string>;
+
+function HeroSection({locale, c}: {locale: string; c: C}) {
   return (
     <section className="relative min-h-[70vh] py-[75px] bg-gradient-to-br from-[#e6f7ff] to-white overflow-hidden">
       <div className="cloud cloud-1" />
@@ -19,12 +25,8 @@ function HeroSection() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="lg:w-1/2 relative z-10 -mt-16">
-            <h1 className="text-5xl font-bold mb-6 text-[#004085] leading-tight">
-              {t('title')}
-            </h1>
-            <p className="text-xl leading-relaxed text-gray-700 max-w-[90%]">
-              {t('description')}
-            </p>
+            <EditableText contentKey="hero.title" locale={locale} value={c['hero.title']} tag="h1" className="text-5xl font-bold mb-6 text-[#004085] leading-tight" />
+            <EditableText contentKey="hero.description" locale={locale} value={c['hero.description']} multiline tag="p" className="text-xl leading-relaxed text-gray-700 max-w-[90%]" />
           </div>
           <div className="lg:w-1/2 relative min-h-[450px] -mt-16">
             <Image src="/images/ovalimg1.jpg" alt="" width={300} height={300}
@@ -40,7 +42,7 @@ function HeroSection() {
   );
 }
 
-function AboutSection({locale}: {locale: string}) {
+function AboutSection({locale, c}: {locale: string; c: C}) {
   const t = useTranslations('aboutSection');
   return (
     <section className="py-16 bg-gray-50">
@@ -51,9 +53,9 @@ function AboutSection({locale}: {locale: string}) {
               className="rounded-lg shadow-lg w-full" />
           </div>
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold mb-6">{t('title')}</h2>
-            <p className="text-lg leading-relaxed mb-4">{t('lead')}</p>
-            <p className="mb-6">{t('body')}</p>
+            <EditableText contentKey="aboutSection.title" locale={locale} value={c['aboutSection.title']} tag="h2" className="text-3xl font-bold mb-6" />
+            <EditableText contentKey="aboutSection.lead" locale={locale} value={c['aboutSection.lead']} multiline tag="p" className="text-lg leading-relaxed mb-4" />
+            <EditableText contentKey="aboutSection.body" locale={locale} value={c['aboutSection.body']} multiline tag="p" className="mb-6" />
             <div className="flex gap-3">
               <Link href={`/${locale}/about`} className="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 transition-colors">
                 {t('learnMore')}
@@ -69,7 +71,7 @@ function AboutSection({locale}: {locale: string}) {
   );
 }
 
-function MissionSection({locale}: {locale: string}) {
+function MissionSection({locale, c}: {locale: string; c: C}) {
   const t = useTranslations('mission');
   const icons = ['fa-lock-open', 'fa-handshake', 'fa-balance-scale', 'fa-chart-line', 'fa-graduation-cap'];
   const values: string[] = t.raw('values');
@@ -84,22 +86,18 @@ function MissionSection({locale}: {locale: string}) {
       </div>
 
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-[#2c3e50] mb-10 -mt-10 section-title-underline centered">
-          {t('sectionTitle')}
-        </h2>
+        <EditableText contentKey="mission.sectionTitle" locale={locale} value={c['mission.sectionTitle']} tag="h2" className="text-4xl font-bold text-center text-[#2c3e50] mb-10 -mt-10 section-title-underline centered" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Mission */}
-          <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#3498db] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100 group">
-            <h3 className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8">{t('missionTitle')}</h3>
-            <div className="text-lg leading-relaxed text-[#34495e]">
-              <p>{t('missionText')}</p>
-            </div>
+          <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#3498db] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
+            <EditableText contentKey="mission.missionTitle" locale={locale} value={c['mission.missionTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
+            <EditableText contentKey="mission.missionText" locale={locale} value={c['mission.missionText']} multiline tag="p" className="text-lg leading-relaxed text-[#34495e]" />
           </div>
 
           {/* Values */}
           <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#e74c3c] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
-            <h3 className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8">{t('valuesTitle')}</h3>
+            <EditableText contentKey="mission.valuesTitle" locale={locale} value={c['mission.valuesTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
             <ul className="values-list">
               {values.map((v: string, i: number) => (
                 <li key={i}><i className={`fas ${icons[i]} mr-2`} /> {v}</li>
@@ -109,10 +107,8 @@ function MissionSection({locale}: {locale: string}) {
 
           {/* Goals */}
           <div className="bg-white rounded-2xl shadow-lg p-10 h-[90%] transition-all duration-400 hover:-translate-y-4 hover:shadow-xl relative overflow-hidden border-b-4 border-transparent before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-[#27ae60] before:scale-x-0 before:origin-left before:transition-transform before:duration-400 hover:before:scale-x-100">
-            <h3 className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8">{t('goalsTitle')}</h3>
-            <div className="text-lg leading-relaxed text-[#34495e]">
-              <p>{t('goalsText')}</p>
-            </div>
+            <EditableText contentKey="mission.goalsTitle" locale={locale} value={c['mission.goalsTitle']} tag="h3" className="text-2xl font-bold mb-5 text-[#2c3e50] text-center pb-8" />
+            <EditableText contentKey="mission.goalsText" locale={locale} value={c['mission.goalsText']} multiline tag="p" className="text-lg leading-relaxed text-[#34495e]" />
           </div>
         </div>
       </div>
@@ -125,7 +121,7 @@ function MissionSection({locale}: {locale: string}) {
   );
 }
 
-function MembershipSection() {
+function MembershipSection({locale, c}: {locale: string; c: C}) {
   const t = useTranslations('membership');
   const benefits: Array<{icon: string; title: string; description: string; highlight: string}> = t.raw('benefits');
 
@@ -133,8 +129,8 @@ function MembershipSection() {
     <section className="py-12 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-5 text-[#2c3e50]">{t('sectionTitle')}</h2>
-          <p className="text-lg text-gray-500 max-w-[700px] mx-auto">{t('subtitle')}</p>
+          <EditableText contentKey="membership.sectionTitle" locale={locale} value={c['membership.sectionTitle']} tag="h2" className="text-4xl font-bold mb-5 text-[#2c3e50]" />
+          <EditableText contentKey="membership.subtitle" locale={locale} value={c['membership.subtitle']} multiline tag="p" className="text-lg text-gray-500 max-w-[700px] mx-auto" />
         </div>
         <div className="flex flex-wrap justify-between gap-8">
           {benefits.map((b, i) => (
@@ -155,13 +151,13 @@ function MembershipSection() {
   );
 }
 
-function FAQSection() {
+function FAQSection({locale, c}: {locale: string; c: C}) {
   const t = useTranslations('faq');
   const items: Array<{question: string; answer: string}> = t.raw('items');
 
   return (
     <section className="py-12 px-4 md:px-24">
-      <h3 className="text-2xl font-bold text-center mb-8">{t('title')}</h3>
+      <EditableText contentKey="faq.title" locale={locale} value={c['faq.title']} tag="h3" className="text-2xl font-bold text-center mb-8" />
       <div className="max-w-4xl mx-auto space-y-4">
         {items.map((item, i) => (
           <details key={i} className="border border-gray-200 rounded-lg" open={i === 0}>
@@ -180,16 +176,53 @@ function FAQSection() {
 
 export default async function HomePage({params}: {params: Promise<{locale: string}>}) {
   const {locale} = await params;
+
+  const [heroT, aboutT, missionT, membershipT, faqT] = await Promise.all([
+    getTranslations({locale, namespace: 'hero'}),
+    getTranslations({locale, namespace: 'aboutSection'}),
+    getTranslations({locale, namespace: 'mission'}),
+    getTranslations({locale, namespace: 'membership'}),
+    getTranslations({locale, namespace: 'faq'}),
+  ]);
+
+  const c = await getContents(
+    [
+      'hero.title', 'hero.description',
+      'aboutSection.title', 'aboutSection.lead', 'aboutSection.body',
+      'mission.sectionTitle', 'mission.missionTitle', 'mission.missionText',
+      'mission.valuesTitle', 'mission.goalsTitle', 'mission.goalsText',
+      'membership.sectionTitle', 'membership.subtitle',
+      'faq.title',
+    ],
+    locale,
+    {
+      'hero.title': heroT('title'),
+      'hero.description': heroT('description'),
+      'aboutSection.title': aboutT('title'),
+      'aboutSection.lead': aboutT('lead'),
+      'aboutSection.body': aboutT('body'),
+      'mission.sectionTitle': missionT('sectionTitle'),
+      'mission.missionTitle': missionT('missionTitle'),
+      'mission.missionText': missionT('missionText'),
+      'mission.valuesTitle': missionT('valuesTitle'),
+      'mission.goalsTitle': missionT('goalsTitle'),
+      'mission.goalsText': missionT('goalsText'),
+      'membership.sectionTitle': membershipT('sectionTitle'),
+      'membership.subtitle': membershipT('subtitle'),
+      'faq.title': faqT('title'),
+    }
+  );
+
   return (
     <>
       <TopBar />
       <Navbar />
-      <HeroSection />
-      <AboutSection locale={locale} />
+      <HeroSection locale={locale} c={c} />
+      <AboutSection locale={locale} c={c} />
       <PartnersCarousel />
-      <MissionSection locale={locale} />
-      <MembershipSection />
-      <FAQSection />
+      <MissionSection locale={locale} c={c} />
+      <MembershipSection locale={locale} c={c} />
+      <FAQSection locale={locale} c={c} />
       <Footer />
       <ScrollToTop />
     </>

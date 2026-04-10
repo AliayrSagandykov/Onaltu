@@ -63,13 +63,13 @@ export default async function AdminDashboard() {
             </div>
           </div>
 
-          {/* Page editor */}
-          <Link href="/admin/pages" className="bg-white rounded-xl shadow-md p-8 hover:-translate-y-1 hover:shadow-lg transition-all group">
+          {/* Visual editor */}
+          <Link href="/admin/editor" className="bg-white rounded-xl shadow-md p-8 hover:-translate-y-1 hover:shadow-lg transition-all group">
             <div className="text-4xl text-green-500 mb-4">
-              <i className="fas fa-file-alt" />
+              <i className="fas fa-paint-brush" />
             </div>
-            <h2 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-green-600">Редактор страниц</h2>
-            <p className="text-gray-500">Изменение текстов на страницах сайта</p>
+            <h2 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-green-600">Визуальный редактор</h2>
+            <p className="text-gray-500">Редактировать текст и изображения прямо на сайте</p>
           </Link>
 
           {/* Admin users */}

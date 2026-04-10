@@ -1,10 +1,12 @@
 import {NextIntlClientProvider} from 'next-intl';
 import {routing} from '@/i18n/routing';
 import {notFound} from 'next/navigation';
+import {Suspense} from 'react';
 import "../globals.css";
 import SessionProvider from '@/components/SessionProvider';
 import {EditModeProvider} from '@/context/EditModeContext';
 import EditModeBar from '@/components/EditModeBar';
+import EditModeInitializer from '@/components/EditModeInitializer';
 
 export default async function LocaleLayout({
   children,
@@ -42,10 +44,11 @@ export default async function LocaleLayout({
         <SessionProvider>
           <EditModeProvider>
             <NextIntlClientProvider locale={locale} messages={messages}>
-              <EditModeBar />
-              <div id="page-content">
-                {children}
-              </div>
+              <Suspense fallback={null}>
+                <EditModeInitializer />
+                <EditModeBar />
+              </Suspense>
+              {children}
             </NextIntlClientProvider>
           </EditModeProvider>
         </SessionProvider>
