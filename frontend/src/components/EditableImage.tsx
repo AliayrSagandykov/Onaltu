@@ -34,12 +34,12 @@ export default function EditableImage({contentKey, locale, src: initialSrc, alt,
   };
 
   if (!editMode) {
-    return <Image src={src} alt={alt} width={width} height={height} className={className} />;
+    return <Image src={src} alt={alt} width={width} height={height} className={className} unoptimized />;
   }
 
   return (
     <div className="relative group">
-      <Image src={src} alt={alt} width={width} height={height} className={`${className} outline-2 outline-dashed outline-orange-400 outline-offset-2`} />
+      <Image src={src} alt={alt} width={width} height={height} className={`${className} outline-2 outline-dashed outline-orange-400 outline-offset-2`} unoptimized />
       {!editing && (
         <div
           onClick={() => setEditing(true)}
@@ -51,15 +51,15 @@ export default function EditableImage({contentKey, locale, src: initialSrc, alt,
         </div>
       )}
       {editing && (
-        <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-4 rounded">
-          <p className="text-white text-sm mb-2 font-medium">URL изображения:</p>
+        <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center p-4 rounded z-50">
+          <p className="text-white text-sm mb-2 font-medium">URL изображения (или /images/filename.jpg):</p>
           <input
             type="text"
             value={draft}
             onChange={e => setDraft(e.target.value)}
             autoFocus
             className="w-full p-2 rounded-lg text-sm mb-3 focus:outline-none"
-            placeholder="https://..."
+            placeholder="https://... или /images/photo.jpg"
           />
           <div className="flex gap-2">
             <button onClick={save} disabled={saving} className="bg-orange-500 text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-orange-600 disabled:opacity-50">

@@ -1,22 +1,21 @@
 'use client';
 
-import {useTranslations} from 'next-intl';
 import {useEffect, useRef} from 'react';
-import Image from 'next/image';
+import EditableImage from '@/components/EditableImage';
+import EditableText from '@/components/EditableText';
 
-const partners = [
-  {src: 'https://www.nccr.kz/images/banners/logo.png', alt: 'NCCR'},
-  {src: '/images/AqbulakNCCR.jpg', alt: 'Aqbulak'},
-  {src: 'https://altynshipager.kz/rehabilitation-conference/assets/img/favicon.png', alt: 'Altyn Shipager'},
-  {src: 'https://via.placeholder.com/200x100?text=Partner+4', alt: 'Partner 4'},
-  {src: 'https://via.placeholder.com/200x100?text=Partner+5', alt: 'Partner 5'},
-  {src: 'https://via.placeholder.com/200x100?text=Partner+6', alt: 'Partner 6'},
-  {src: 'https://via.placeholder.com/200x100?text=Partner+7', alt: 'Partner 7'},
-  {src: 'https://via.placeholder.com/200x100?text=Partner+8', alt: 'Partner 8'},
-];
+export interface PartnerItem {
+  src: string;
+  alt: string;
+}
 
-export default function PartnersCarousel() {
-  const t = useTranslations('partners');
+interface Props {
+  locale: string;
+  titleValue: string;
+  partners: PartnerItem[];
+}
+
+export default function PartnersCarousel({locale, titleValue, partners}: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,7 +51,6 @@ export default function PartnersCarousel() {
       const x = e.pageX - track.offsetLeft;
       track.scrollLeft = scrollLeft - (x - startX) * 2;
     };
-
     const onTouchStart = (e: TouchEvent) => {
       isDown = true;
       startX = e.touches[0].pageX - track.offsetLeft;
@@ -89,9 +87,13 @@ export default function PartnersCarousel() {
 
   return (
     <section className="py-20 bg-gray-50 overflow-hidden">
-      <h2 className="text-center text-4xl font-bold mb-12 text-gray-800">
-        {t('title')}
-      </h2>
+      <EditableText
+        contentKey="partners.title"
+        locale={locale}
+        value={titleValue}
+        tag="h2"
+        className="text-center text-4xl font-bold mb-12 text-gray-800"
+      />
       <div className="max-w-[1200px] mx-auto px-4">
         <div ref={trackRef} className="partners-track">
           {partners.map((p, i) => (
@@ -99,13 +101,14 @@ export default function PartnersCarousel() {
               key={i}
               className="flex-shrink-0 w-[250px] h-[250px] bg-white rounded-2xl flex items-center justify-center p-6 hover:-translate-y-2.5 hover:shadow-xl transition-all scroll-snap-align-start"
             >
-              <Image
+              <EditableImage
+                contentKey={`partners.${i}.src`}
+                locale={locale}
                 src={p.src}
                 alt={p.alt}
                 width={200}
                 height={100}
                 className="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all duration-400"
-                unoptimized
               />
             </div>
           ))}
