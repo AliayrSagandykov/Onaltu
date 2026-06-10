@@ -28,16 +28,13 @@ model PageContent {
 
 model Article {
   id          String   @id @default(cuid())
-  slug        String
+  slug        String   @unique
   locale      String   @default("ru")
   title       String
   content     String
   excerpt     String?
   imageUrl    String?
-  images      String[] @default([])
   published   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  @@unique([slug, locale])
 }

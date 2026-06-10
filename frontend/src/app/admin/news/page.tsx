@@ -14,7 +14,6 @@ interface Article {
   content: string;
   excerpt: string | null;
   imageUrl: string | null;
-  images?: string[];
   published: boolean;
   createdAt: string;
 }
