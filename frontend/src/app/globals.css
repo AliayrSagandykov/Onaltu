@@ -7,6 +7,13 @@ html {
 
 body {
   font-family: "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Make any raw <img> inside content areas responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* ===== Cloud Animations (Hero Section) ===== */
@@ -18,16 +25,16 @@ body {
 }
 
 .cloud-1 {
-  width: 200px;
-  height: 80px;
+  width: clamp(80px, 18vw, 200px);
+  height: clamp(32px, 7vw, 80px);
   top: 10%;
   right: 10%;
   animation: float 12s infinite ease-in-out;
 }
 
 .cloud-2 {
-  width: 150px;
-  height: 60px;
+  width: clamp(60px, 14vw, 150px);
+  height: clamp(24px, 5vw, 60px);
   top: 30%;
   left: 5%;
   animation: float 10s infinite ease-in-out;
@@ -35,8 +42,8 @@ body {
 }
 
 .cloud-3 {
-  width: 180px;
-  height: 70px;
+  width: clamp(70px, 16vw, 180px);
+  height: clamp(28px, 6vw, 70px);
   bottom: 20%;
   right: 20%;
   animation: float 14s infinite ease-in-out;
@@ -44,8 +51,8 @@ body {
 }
 
 .cloud-4 {
-  width: 180px;
-  height: 70px;
+  width: clamp(70px, 16vw, 180px);
+  height: clamp(28px, 6vw, 70px);
   bottom: 25%;
   right: 15%;
   animation: float 14s infinite ease-in-out;
@@ -53,12 +60,18 @@ body {
 }
 
 .cloud-5 {
-  width: 150px;
-  height: 70px;
+  width: clamp(60px, 14vw, 150px);
+  height: clamp(28px, 6vw, 70px);
   bottom: 29%;
   left: 38%;
   animation: float 14s infinite ease-in-out;
   animation-delay: 3s;
+}
+
+@media (max-width: 640px) {
+  .cloud {
+    opacity: 0.6;
+  }
 }
 
 @keyframes float {
@@ -120,19 +133,32 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: 80px;
+  margin-bottom: 48px;
   position: relative;
+}
+
+@media (min-width: 640px) {
+  .governance-level {
+    margin-bottom: 80px;
+  }
 }
 
 .governance-level:not(:last-child):after {
   content: "";
   position: absolute;
-  bottom: -40px;
+  bottom: -24px;
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: 40px;
+  height: 24px;
   background: #3498db;
+}
+
+@media (min-width: 640px) {
+  .governance-level:not(:last-child):after {
+    bottom: -40px;
+    height: 40px;
+  }
 }
 
 /* ===== Direction Items ===== */
@@ -154,12 +180,20 @@ body {
 /* ===== Step Divider Lines (Membership Page) ===== */
 .step-divider {
   position: absolute;
-  left: 30px;
-  top: 60px;
-  bottom: -40px;
+  left: 23px;
+  top: 48px;
+  bottom: -32px;
   width: 2px;
   background: #1a6aa2;
   z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .step-divider {
+    left: 30px;
+    top: 60px;
+    bottom: -40px;
+  }
 }
 
 .step:last-child .step-divider {
@@ -185,7 +219,7 @@ body {
 
 /* ===== Footer Map Container ===== */
 .footer-map-container {
-  height: 300px;
+  height: clamp(220px, 35vw, 300px);
   width: 100%;
   border-radius: 8px;
   overflow: hidden;

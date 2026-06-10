@@ -27,9 +27,9 @@ export default function Navbar() {
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-40">
-      <div className="container mx-auto px-4 flex items-center justify-between py-2">
+      <div className="container mx-auto px-4 flex items-center justify-between py-2 gap-2">
         <Link href={`/${locale}`} className="flex items-center">
-          <Image src="/images/onaltu_logo.png" alt="ONALTU" width={128} height={128} className="h-20 w-auto" />
+          <Image src="/images/onaltu_logo.png" alt="ONALTU" width={128} height={128} className="h-12 sm:h-16 lg:h-20 w-auto" />
         </Link>
 
         {/* Mobile hamburger */}

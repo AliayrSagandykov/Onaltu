@@ -50,37 +50,37 @@ export default async function ContactsPage({params}: {params: Promise<{locale: s
       <TopBar />
       <Navbar />
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <EditableText contentKey="contactsPage.title" locale={locale} value={c['contactsPage.title']} tag="h1" className="text-4xl font-bold text-[#1a6aa2] mt-6 ml-0 md:ml-12" />
-          <EditableText contentKey="contactsPage.subtitle" locale={locale} value={c['contactsPage.subtitle']} tag="p" className="text-[#1a6aa2] ml-0 md:ml-12 mt-2" />
+      <div className="max-w-6xl mx-auto px-4 py-6 sm:py-8">
+        <div className="mb-6 sm:mb-8">
+          <EditableText contentKey="contactsPage.title" locale={locale} value={c['contactsPage.title']} tag="h1" className="text-3xl sm:text-4xl font-bold text-[#1a6aa2] mt-4 sm:mt-6 ml-0 md:ml-12" />
+          <EditableText contentKey="contactsPage.subtitle" locale={locale} value={c['contactsPage.subtitle']} tag="p" className="text-[#1a6aa2] ml-0 md:ml-12 mt-2 text-base sm:text-lg" />
         </div>
 
-        <div className="p-4 md:p-10 bg-white">
+        <div className="p-4 sm:p-6 md:p-10 bg-white">
           {contacts.map((contact, i) => (
-            <div key={i} className="bg-white rounded-lg p-6 mb-6 shadow-sm border-l-4 border-[#1a6aa2] hover:-translate-y-1 hover:shadow-md transition-all">
+            <div key={i} className="bg-white rounded-lg p-4 sm:p-6 mb-6 shadow-sm border-l-4 border-[#1a6aa2] hover:-translate-y-1 hover:shadow-md transition-all">
               <EditableText
                 contentKey={`contactsPage.contact.${i}.name`}
                 locale={locale}
                 value={c[`contactsPage.contact.${i}.name`] ?? contact.name}
                 tag="h3"
-                className="text-xl font-semibold text-[#2a5298] mb-2"
+                className="text-lg sm:text-xl font-semibold text-[#2a5298] mb-2"
               />
               <EditableText
                 contentKey={`contactsPage.contact.${i}.position`}
                 locale={locale}
                 value={c[`contactsPage.contact.${i}.position`] ?? contact.position}
                 tag="div"
-                className="text-gray-500 mb-4 text-lg"
+                className="text-gray-500 mb-4 text-base sm:text-lg"
               />
-              <div className="flex items-center gap-2 mb-1 text-lg">
+              <div className="flex items-center gap-2 mb-1 text-base sm:text-lg flex-wrap">
                 <i className="fas fa-phone-alt text-[#1a6aa2] w-6 text-center" />
                 <EditableText
                   contentKey={`contactsPage.contact.${i}.phone`}
                   locale={locale}
                   value={c[`contactsPage.contact.${i}.phone`] ?? contact.phone}
                   tag="span"
-                  className="font-medium text-gray-800"
+                  className="font-medium text-gray-800 break-all"
                 />
               </div>
               <ContactActionButtons
@@ -92,25 +92,25 @@ export default async function ContactsPage({params}: {params: Promise<{locale: s
           ))}
 
           {/* Meta info */}
-          <div className="mt-10 pt-5 border-t border-gray-200">
-            <p className="flex items-center gap-2 mb-3">
-              <i className="fas fa-map-marker-alt text-[#1a6aa2] w-6 text-center" />
+          <div className="mt-8 sm:mt-10 pt-5 border-t border-gray-200">
+            <p className="flex items-start gap-2 mb-3">
+              <i className="fas fa-map-marker-alt text-[#1a6aa2] w-6 text-center flex-shrink-0 mt-1" />
               <EditableText contentKey="contactsPage.meta.address" locale={locale} value={c['contactsPage.meta.address']} tag="span" />
             </p>
-            <p className="flex items-center gap-2 mb-3">
-              <i className="fas fa-envelope text-[#1a6aa2] w-6 text-center" />
-              <EditableText contentKey="contactsPage.meta.email" locale={locale} value={c['contactsPage.meta.email']} tag="span" />
+            <p className="flex items-start gap-2 mb-3">
+              <i className="fas fa-envelope text-[#1a6aa2] w-6 text-center flex-shrink-0 mt-1" />
+              <EditableText contentKey="contactsPage.meta.email" locale={locale} value={c['contactsPage.meta.email']} tag="span" className="break-all" />
             </p>
-            <p className="flex items-center gap-2 mb-3">
-              <i className="fas fa-clock text-[#1a6aa2] w-6 text-center" />
+            <p className="flex items-start gap-2 mb-3">
+              <i className="fas fa-clock text-[#1a6aa2] w-6 text-center flex-shrink-0 mt-1" />
               <EditableText contentKey="contactsPage.meta.hours" locale={locale} value={c['contactsPage.meta.hours']} tag="span" />
             </p>
           </div>
         </div>
 
         {/* Contact form */}
-        <div className="p-4 md:p-10 mt-4">
-          <EditableText contentKey="contactsPage.formTitle" locale={locale} value={c['contactsPage.formTitle']} tag="h2" className="text-2xl font-semibold text-[#2a5298] mb-8 pb-4 border-b-2 border-gray-200 section-title-underline" />
+        <div className="p-4 sm:p-6 md:p-10 mt-4">
+          <EditableText contentKey="contactsPage.formTitle" locale={locale} value={c['contactsPage.formTitle']} tag="h2" className="text-xl sm:text-2xl font-semibold text-[#2a5298] mb-6 sm:mb-8 pb-3 sm:pb-4 border-b-2 border-gray-200 section-title-underline" />
           <ContactForm />
         </div>
       </div>

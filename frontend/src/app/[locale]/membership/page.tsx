@@ -61,58 +61,60 @@ export default async function MembershipPage({params}: {params: Promise<{locale:
       <Navbar />
 
       {/* Hero Slide */}
-      <div className="mt-4 mx-4 w-full max-w-[200vh] bg-white rounded-2xl overflow-hidden shadow-2xl">
-        <div className="bg-gradient-to-r from-[#1a6aa2] to-[#2a5298] p-10 text-center">
-          <EditableText contentKey="membershipPage.associationName" locale={locale} value={c['membershipPage.associationName']} tag="div" className="text-2xl font-bold text-white mb-2 tracking-wide" />
-          <EditableText contentKey="membershipPage.title" locale={locale} value={c['membershipPage.title']} tag="h1" className="text-4xl font-extrabold text-white mb-4 [text-shadow:0_2px_10px_rgba(0,0,0,0.2)]" />
-          <EditableText contentKey="membershipPage.subtitle" locale={locale} value={c['membershipPage.subtitle']} multiline tag="p" className="text-lg text-white/90 max-w-[700px] mx-auto leading-relaxed" />
-        </div>
-        <div className="flex flex-col p-10 gap-8">
-          {benefits.map((b, i) => (
-            <div key={i} className="flex flex-col md:flex-row items-center md:items-start gap-6 pb-8 border-b border-gray-200 last:border-0 last:pb-0">
-              <div className="min-w-[70px] h-[70px] bg-[#e6f0fa] rounded-full flex items-center justify-center flex-shrink-0">
-                <i className={`fas ${benefitIcons[i] ?? 'fa-star'} text-2xl text-[#1a6aa2]`} />
+      <div className="container mx-auto px-4 mt-4">
+        <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
+          <div className="bg-gradient-to-r from-[#1a6aa2] to-[#2a5298] p-6 sm:p-10 text-center">
+            <EditableText contentKey="membershipPage.associationName" locale={locale} value={c['membershipPage.associationName']} tag="div" className="text-lg sm:text-2xl font-bold text-white mb-2 tracking-wide" />
+            <EditableText contentKey="membershipPage.title" locale={locale} value={c['membershipPage.title']} tag="h1" className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-4 [text-shadow:0_2px_10px_rgba(0,0,0,0.2)]" />
+            <EditableText contentKey="membershipPage.subtitle" locale={locale} value={c['membershipPage.subtitle']} multiline tag="p" className="text-base sm:text-lg text-white/90 max-w-[700px] mx-auto leading-relaxed" />
+          </div>
+          <div className="flex flex-col p-6 sm:p-10 gap-6 sm:gap-8">
+            {benefits.map((b, i) => (
+              <div key={i} className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-6 pb-6 sm:pb-8 border-b border-gray-200 last:border-0 last:pb-0 text-center md:text-left">
+                <div className="min-w-[60px] h-[60px] sm:min-w-[70px] sm:h-[70px] bg-[#e6f0fa] rounded-full flex items-center justify-center flex-shrink-0">
+                  <i className={`fas ${benefitIcons[i] ?? 'fa-star'} text-xl sm:text-2xl text-[#1a6aa2]`} />
+                </div>
+                <div>
+                  <EditableText
+                    contentKey={`membershipPage.benefit.${i}.title`}
+                    locale={locale}
+                    value={c[`membershipPage.benefit.${i}.title`] ?? b.title}
+                    tag="h3"
+                    className="text-lg sm:text-xl font-semibold text-[#2a5298] mb-3"
+                  />
+                  <EditableText
+                    contentKey={`membershipPage.benefit.${i}.description`}
+                    locale={locale}
+                    value={c[`membershipPage.benefit.${i}.description`] ?? b.description}
+                    multiline
+                    tag="p"
+                    className="text-gray-600 leading-relaxed text-base sm:text-lg"
+                  />
+                </div>
               </div>
-              <div>
-                <EditableText
-                  contentKey={`membershipPage.benefit.${i}.title`}
-                  locale={locale}
-                  value={c[`membershipPage.benefit.${i}.title`] ?? b.title}
-                  tag="h3"
-                  className="text-xl font-semibold text-[#2a5298] mb-3"
-                />
-                <EditableText
-                  contentKey={`membershipPage.benefit.${i}.description`}
-                  locale={locale}
-                  value={c[`membershipPage.benefit.${i}.description`] ?? b.description}
-                  multiline
-                  tag="p"
-                  className="text-gray-600 leading-relaxed text-lg"
-                />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
       {/* How to join */}
-      <div className="container mx-auto px-4 mt-24 mb-12">
+      <div className="container mx-auto px-4 mt-12 sm:mt-16 lg:mt-24 mb-12">
         <div className="text-center mb-8">
-          <EditableText contentKey="membershipPage.howToJoinTitle" locale={locale} value={c['membershipPage.howToJoinTitle']} tag="h1" className="text-3xl font-bold text-gray-800" />
-          <EditableText contentKey="membershipPage.howToJoinSubtitle" locale={locale} value={c['membershipPage.howToJoinSubtitle']} tag="p" className="text-gray-500 mt-2" />
+          <EditableText contentKey="membershipPage.howToJoinTitle" locale={locale} value={c['membershipPage.howToJoinTitle']} tag="h1" className="text-2xl sm:text-3xl font-bold text-gray-800" />
+          <EditableText contentKey="membershipPage.howToJoinSubtitle" locale={locale} value={c['membershipPage.howToJoinSubtitle']} tag="p" className="text-gray-500 mt-2 text-base sm:text-lg" />
         </div>
 
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           {steps.map((step, i) => (
-            <div key={i} className="flex relative mb-10">
-              <div className="min-w-[60px] h-[60px] bg-[#1a6aa2] text-white rounded-full flex items-center justify-center text-2xl font-bold mr-6 flex-shrink-0 z-[2]">
+            <div key={i} className="flex relative mb-8 sm:mb-10">
+              <div className="min-w-[48px] h-[48px] sm:min-w-[60px] sm:h-[60px] bg-[#1a6aa2] text-white rounded-full flex items-center justify-center text-xl sm:text-2xl font-bold mr-4 sm:mr-6 flex-shrink-0 z-[2]">
                 {i + 1}
               </div>
-              <div className="pt-3 flex-grow">
-                <EditableText contentKey={`membershipPage.step.${i}.title`} locale={locale} value={c[`membershipPage.step.${i}.title`] ?? step.title} tag="h2" className="text-xl font-semibold text-[#2a5298] mb-4" />
+              <div className="pt-2 sm:pt-3 flex-grow min-w-0">
+                <EditableText contentKey={`membershipPage.step.${i}.title`} locale={locale} value={c[`membershipPage.step.${i}.title`] ?? step.title} tag="h2" className="text-lg sm:text-xl font-semibold text-[#2a5298] mb-3 sm:mb-4" />
                 <EditableText contentKey={`membershipPage.step.${i}.description`} locale={locale} value={c[`membershipPage.step.${i}.description`] ?? step.description} multiline tag="p" className="text-gray-600" />
                 {step.details && (
-                  <div className="step-details bg-gray-50 rounded-lg p-5 mt-4 border-l-[3px] border-[#1a6aa2]">
+                  <div className="step-details bg-gray-50 rounded-lg p-4 sm:p-5 mt-4 border-l-[3px] border-[#1a6aa2]">
                     {step.details.map((d, j) => (
                       <p key={j}>{d}</p>
                     ))}
@@ -126,14 +128,14 @@ export default async function MembershipPage({params}: {params: Promise<{locale:
 
         {/* Files */}
         <div className="mt-8 border border-gray-200 rounded-lg overflow-hidden">
-          <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-            <EditableText contentKey="membershipPage.filesTitle" locale={locale} value={c['membershipPage.filesTitle']} tag="h5" className="text-lg font-semibold" />
+          <div className="bg-gray-50 px-4 sm:px-6 py-4 border-b border-gray-200">
+            <EditableText contentKey="membershipPage.filesTitle" locale={locale} value={c['membershipPage.filesTitle']} tag="h5" className="text-base sm:text-lg font-semibold" />
           </div>
-          <div className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="p-4 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               {files.map((f, i) => (
-                <div key={i} className="border border-gray-200 rounded-lg p-6 text-center">
-                  <h6 className="font-medium mb-3">{f.name}</h6>
+                <div key={i} className="border border-gray-200 rounded-lg p-4 sm:p-6 text-center">
+                  <h6 className="font-medium mb-3 break-words">{f.name}</h6>
                   <a
                     href={f.file}
                     download

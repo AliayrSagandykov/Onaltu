@@ -11,8 +11,8 @@ export default function EditModeBar() {
   if (!isAdminEdit || !editMode) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[9999] bg-blue-600 text-white text-sm px-6 py-2 flex items-center justify-center gap-3 shadow-lg">
-      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+    <div className="fixed bottom-0 left-0 right-0 z-[9999] bg-blue-600 text-white text-xs sm:text-sm px-4 sm:px-6 py-2 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-center">
+      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
       <span>Режим редактирования активен — нажмите на любой выделенный элемент для изменения</span>
     </div>
   );

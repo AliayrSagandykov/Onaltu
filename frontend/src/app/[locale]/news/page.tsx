@@ -27,24 +27,24 @@ export default async function NewsPage({params}: {params: Promise<{locale: strin
       <TopBar />
       <Navbar />
 
-      <div className="container mx-auto px-4 py-16 min-h-[60vh]">
-        <h1 className="text-4xl font-bold text-[#2c3e50] mb-10 section-title-underline">{t('title')}</h1>
+      <div className="container mx-auto px-4 py-10 sm:py-16 min-h-[60vh]">
+        <h1 className="text-3xl sm:text-4xl font-bold text-[#2c3e50] mb-8 sm:mb-10 section-title-underline">{t('title')}</h1>
 
         {articles.length === 0 ? (
-          <div className="text-center text-gray-500 py-20">
-            <i className="fas fa-newspaper text-6xl mb-4 opacity-30" />
-            <p className="text-xl">{t('noArticles')}</p>
+          <div className="text-center text-gray-500 py-12 sm:py-20">
+            <i className="fas fa-newspaper text-5xl sm:text-6xl mb-4 opacity-30" />
+            <p className="text-lg sm:text-xl">{t('noArticles')}</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {articles.map((article) => (
               <Link
                 key={article.id}
                 href={`/${locale}/news/${article.slug}`}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group flex flex-col"
               >
                 {article.imageUrl && (
-                  <div className="h-48 overflow-hidden">
+                  <div className="aspect-video w-full overflow-hidden">
                     <img
                       src={article.imageUrl}
                       alt={article.title}
@@ -52,11 +52,11 @@ export default async function NewsPage({params}: {params: Promise<{locale: strin
                     />
                   </div>
                 )}
-                <div className="p-6">
+                <div className="p-5 sm:p-6 flex flex-col flex-grow">
                   <div className="text-sm text-gray-400 mb-2">
                     {new Date(article.createdAt).toLocaleDateString(locale === 'kz' ? 'kk-KZ' : locale === 'en' ? 'en-US' : 'ru-RU')}
                   </div>
-                  <h2 className="text-xl font-bold text-[#2c3e50] mb-3 group-hover:text-blue-600 transition-colors">
+                  <h2 className="text-lg sm:text-xl font-bold text-[#2c3e50] mb-3 group-hover:text-blue-600 transition-colors">
                     {article.title}
                   </h2>
                   {article.excerpt && (

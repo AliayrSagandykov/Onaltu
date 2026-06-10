@@ -86,20 +86,20 @@ export default function PartnersCarousel({locale, titleValue, partners}: Props) 
   }, []);
 
   return (
-    <section className="py-20 bg-gray-50 overflow-hidden">
+    <section className="py-12 sm:py-20 bg-gray-50 overflow-hidden">
       <EditableText
         contentKey="partners.title"
         locale={locale}
         value={titleValue}
         tag="h2"
-        className="text-center text-4xl font-bold mb-12 text-gray-800"
+        className="text-center text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-gray-800 px-4"
       />
       <div className="max-w-[1200px] mx-auto px-4">
         <div ref={trackRef} className="partners-track">
           {partners.map((p, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-[250px] h-[250px] bg-white rounded-2xl flex items-center justify-center p-6 hover:-translate-y-2.5 hover:shadow-xl transition-all scroll-snap-align-start"
+              className="flex-shrink-0 w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] lg:w-[250px] lg:h-[250px] bg-white rounded-2xl flex items-center justify-center p-4 sm:p-6 hover:-translate-y-2.5 hover:shadow-xl transition-all scroll-snap-align-start"
             >
               <EditableImage
                 contentKey={`partners.${i}.src`}

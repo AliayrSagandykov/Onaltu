@@ -18,17 +18,17 @@ function Governance({locale, c}: {locale: string; c: C}) {
   const icons = ['fa-users', 'fa-user-tie', 'fa-shield-alt'];
 
   return (
-    <section className="bg-gradient-to-br from-gray-50 to-gray-200 rounded-lg pt-12 pb-4">
+    <section className="bg-gradient-to-br from-gray-50 to-gray-200 rounded-lg pt-8 sm:pt-12 pb-4">
       <div className="container mx-auto px-4">
-        <EditableText contentKey="about.governanceTitle" locale={locale} value={c['about.governanceTitle']} tag="h2" className="text-2xl font-bold text-[#2a5298] mb-8 pb-2 border-b-2 border-gray-200 section-title-underline" id="rule" />
+        <EditableText contentKey="about.governanceTitle" locale={locale} value={c['about.governanceTitle']} tag="h2" className="text-xl sm:text-2xl font-bold text-[#2a5298] mb-6 sm:mb-8 pb-2 border-b-2 border-gray-200 section-title-underline" id="rule" />
         <div className="max-w-[1200px] mx-auto flex flex-col items-center">
           {governance.map((g, i) => (
             <div key={i} className="governance-level w-full">
-              <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-[500px] text-center hover:-translate-y-2.5 hover:shadow-xl transition-all duration-400 relative z-10">
-                <div className="text-4xl text-[#3498db] mb-4">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 w-full max-w-[500px] text-center hover:-translate-y-2.5 hover:shadow-xl transition-all duration-400 relative z-10">
+                <div className="text-3xl sm:text-4xl text-[#3498db] mb-4">
                   <i className={`fas ${icons[i]}`} />
                 </div>
-                <EditableText contentKey={`about.governance.${i}.title`} locale={locale} value={c[`about.governance.${i}.title`] ?? g.title} tag="h3" className="text-xl font-bold text-[#2c3e50] mb-2" />
+                <EditableText contentKey={`about.governance.${i}.title`} locale={locale} value={c[`about.governance.${i}.title`] ?? g.title} tag="h3" className="text-lg sm:text-xl font-bold text-[#2c3e50] mb-2" />
                 <EditableText contentKey={`about.governance.${i}.subtitle`} locale={locale} value={c[`about.governance.${i}.subtitle`] ?? g.subtitle} tag="div" className="text-sm text-gray-500 mb-4" />
                 <EditableText contentKey={`about.governance.${i}.text`} locale={locale} value={c[`about.governance.${i}.text`] ?? g.text} multiline tag="p" className="text-gray-600 mt-5" />
               </div>
@@ -49,8 +49,8 @@ function Directions({locale, c}: {locale: string; c: C}) {
   const directions: Array<{title: string; description: string}> = t.raw('directions');
 
   return (
-    <div className="p-8">
-      <EditableText contentKey="about.professionalTitle" locale={locale} value={c['about.professionalTitle']} tag="h2" className="text-xl font-semibold text-[#2a5298] mb-4 pb-2 border-b-2 border-gray-200" id="workDirections" />
+    <div className="p-4 sm:p-6 lg:p-8">
+      <EditableText contentKey="about.professionalTitle" locale={locale} value={c['about.professionalTitle']} tag="h2" className="text-lg sm:text-xl font-semibold text-[#2a5298] mb-4 pb-2 border-b-2 border-gray-200" id="workDirections" />
       {directions.slice(0, 5).map((d, i) => (
         <div key={i} className="direction-item">
           <div className="min-w-[30px] h-[30px] bg-[#2a5298] text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0 text-sm">
@@ -63,7 +63,7 @@ function Directions({locale, c}: {locale: string; c: C}) {
         </div>
       ))}
 
-      <EditableText contentKey="about.educationalTitle" locale={locale} value={c['about.educationalTitle']} tag="h2" className="text-xl font-semibold text-[#2a5298] mb-4 mt-8 pb-2 border-b-2 border-gray-200" />
+      <EditableText contentKey="about.educationalTitle" locale={locale} value={c['about.educationalTitle']} tag="h2" className="text-lg sm:text-xl font-semibold text-[#2a5298] mb-4 mt-8 pb-2 border-b-2 border-gray-200" />
       {directions.slice(5).map((d, i) => (
         <div key={i} className="direction-item">
           <div className="min-w-[30px] h-[30px] bg-[#2a5298] text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0 text-sm">
@@ -84,8 +84,8 @@ function Vision({locale, c}: {locale: string; c: C}) {
   const points: string[] = t.raw('visionPoints');
 
   return (
-    <div className="mt-8 p-8">
-      <EditableText contentKey="about.visionTitle" locale={locale} value={c['about.visionTitle']} tag="h4" className="text-xl font-bold mb-4" id="vision" />
+    <div className="mt-8 p-4 sm:p-6 lg:p-8">
+      <EditableText contentKey="about.visionTitle" locale={locale} value={c['about.visionTitle']} tag="h4" className="text-lg sm:text-xl font-bold mb-4" id="vision" />
       <EditableText contentKey="about.visionText" locale={locale} value={c['about.visionText']} multiline tag="p" className="mb-6" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {points.map((p, i) => (
@@ -168,35 +168,35 @@ export default async function AboutPage({params}: {params: Promise<{locale: stri
       <TopBar />
       <Navbar />
 
-      <div className="py-16 bg-white">
+      <div className="py-8 sm:py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4">
           {/* Intro */}
           <div className="mb-8">
-            <div className="rounded-lg overflow-hidden shadow-lg mb-8 hover:scale-[1.02] transition-transform duration-500">
-              <EditableImage contentKey="about.mainImage" locale={locale} src={c['about.mainImage']} alt="Main" width={1200} height={500} className="w-full" />
+            <div className="rounded-lg overflow-hidden shadow-lg mb-6 sm:mb-8 hover:scale-[1.02] transition-transform duration-500">
+              <EditableImage contentKey="about.mainImage" locale={locale} src={c['about.mainImage']} alt="Main" width={1200} height={500} className="w-full h-auto" />
             </div>
-            <EditableText contentKey="about.intro" locale={locale} value={c['about.intro']} multiline className="text-lg leading-relaxed my-8" tag="p" />
+            <EditableText contentKey="about.intro" locale={locale} value={c['about.intro']} multiline className="text-base sm:text-lg leading-relaxed my-6 sm:my-8" tag="p" />
           </div>
 
           {/* President */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-            <h4 className="text-xl font-bold text-blue-800 mb-3">{t('presidentTitle')}</h4>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 sm:p-6 mb-8">
+            <h4 className="text-lg sm:text-xl font-bold text-blue-800 mb-3">{t('presidentTitle')}</h4>
             <hr className="mb-4" />
-            <EditableImage contentKey="about.presidentImage" locale={locale} src={c['about.presidentImage']} alt="President" width={600} height={400} className="rounded-lg mb-3 max-w-[600px] w-full" />
+            <EditableImage contentKey="about.presidentImage" locale={locale} src={c['about.presidentImage']} alt="President" width={600} height={400} className="rounded-lg mb-3 max-w-full sm:max-w-[600px] w-full h-auto" />
             <EditableText contentKey="about.presidentName" locale={locale} value={c['about.presidentName']} className="text-gray-700" tag="p" />
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
             {/* Sidebar */}
-            <div className="lg:w-1/3">
-              <div className="bg-gray-50 rounded-lg p-6 shadow-sm sticky top-24">
-                <h3 className="text-lg font-semibold text-blue-700 mb-5 pb-2 border-b-2 border-blue-400">
+            <div className="w-full lg:w-1/3">
+              <div className="bg-gray-50 rounded-lg p-4 sm:p-6 shadow-sm lg:sticky lg:top-24">
+                <h3 className="text-base sm:text-lg font-semibold text-blue-700 mb-4 sm:mb-5 pb-2 border-b-2 border-blue-400">
                   {t('sidebarTitle')}
                 </h3>
-                <ul className="space-y-3">
+                <ul className="space-y-2 sm:space-y-3">
                   {sidebarLinks.map((link, i) => (
                     <li key={i}>
-                      <a href={anchors[i]} className="block px-4 py-2 rounded font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 hover:pl-5 transition-all">
+                      <a href={anchors[i]} className="block px-3 sm:px-4 py-2 rounded font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 hover:pl-5 transition-all text-sm sm:text-base">
                         {link}
                       </a>
                     </li>
@@ -206,8 +206,8 @@ export default async function AboutPage({params}: {params: Promise<{locale: stri
             </div>
 
             {/* Content */}
-            <div className="lg:w-2/3">
-              <EditableText contentKey="about.historyTitle" locale={locale} value={c['about.historyTitle']} tag="h2" className="text-2xl font-bold text-[#2a5298] mb-6 pb-4 border-b-2 border-gray-200 section-title-underline" id="history" />
+            <div className="w-full lg:w-2/3">
+              <EditableText contentKey="about.historyTitle" locale={locale} value={c['about.historyTitle']} tag="h2" className="text-xl sm:text-2xl font-bold text-[#2a5298] mb-4 sm:mb-6 pb-3 sm:pb-4 border-b-2 border-gray-200 section-title-underline" id="history" />
               <div className="pb-6">
                 <EditableText contentKey="about.historyText1" locale={locale} value={c['about.historyText1']} multiline className="mb-4" tag="p" />
                 <EditableText contentKey="about.historyText2" locale={locale} value={c['about.historyText2']} multiline tag="p" />

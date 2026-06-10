@@ -8,7 +8,7 @@ interface Props {
 
 export default function ContactActionButtons({phoneRaw, callLabel, copyLabel}: Props) {
   return (
-    <div className="flex gap-3 mt-5">
+    <div className="flex flex-wrap gap-3 mt-5">
       <a
         href={`tel:${phoneRaw}`}
         className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
