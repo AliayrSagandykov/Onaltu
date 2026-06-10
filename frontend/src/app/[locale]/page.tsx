@@ -327,15 +327,16 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       <Navbar />
       <HeroSection locale={locale} c={c} />
       <AboutSection locale={locale} c={c} />
-      <PartnersCarousel locale={locale} titleValue={c['partners.title']} partners={partners} />
-      <MissionSection locale={locale} c={c} />
-      <MembershipSection locale={locale} c={c} />
       <NewsCarousel
         locale={locale}
         title={newsT('homeSectionTitle')}
         readMoreLabel={newsT('readMoreBtn')}
+        emptyLabel={newsT('noArticles')}
         articles={newsArticles}
       />
+      <PartnersCarousel locale={locale} titleValue={c['partners.title']} partners={partners} />
+      <MissionSection locale={locale} c={c} />
+      <MembershipSection locale={locale} c={c} />
       <FAQSection locale={locale} c={c} />
       <Footer />
       <ScrollToTop />

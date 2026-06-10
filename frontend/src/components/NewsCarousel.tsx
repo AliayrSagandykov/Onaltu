@@ -16,10 +16,11 @@ interface Props {
   locale: string;
   title: string;
   readMoreLabel: string;
+  emptyLabel: string;
   articles: NewsItem[];
 }
 
-export default function NewsCarousel({locale, title, readMoreLabel, articles}: Props) {
+export default function NewsCarousel({locale, title, readMoreLabel, emptyLabel, articles}: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -102,8 +103,6 @@ export default function NewsCarousel({locale, title, readMoreLabel, articles}: P
     };
   }, []);
 
-  if (articles.length === 0) return null;
-
   const dateLocale = locale === 'kz' ? 'kk-KZ' : locale === 'en' ? 'en-US' : 'ru-RU';
 
   return (
@@ -113,6 +112,12 @@ export default function NewsCarousel({locale, title, readMoreLabel, articles}: P
           {title}
         </h2>
 
+        {articles.length === 0 ? (
+          <div className="text-center text-gray-400 py-12 sm:py-16 bg-gray-50 rounded-2xl">
+            <i className="fas fa-newspaper text-5xl sm:text-6xl mb-4 opacity-40" />
+            <p className="text-base sm:text-lg">{emptyLabel}</p>
+          </div>
+        ) : (
         <div ref={trackRef} className="news-track">
           {articles.map((article) => (
             <div
@@ -153,6 +158,7 @@ export default function NewsCarousel({locale, title, readMoreLabel, articles}: P
             </div>
           ))}
         </div>
+        )}
       </div>
     </section>
   );

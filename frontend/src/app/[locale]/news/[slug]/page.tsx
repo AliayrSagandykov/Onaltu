@@ -24,6 +24,8 @@ export default async function ArticlePage({params}: {params: Promise<{locale: st
 
   if (!article) notFound();
 
+  const gallery = (article.images || []).filter((u) => u && u.trim());
+
   return (
     <>
       <TopBar />
@@ -41,17 +43,45 @@ export default async function ArticlePage({params}: {params: Promise<{locale: st
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#2c3e50] mb-6 sm:mb-8 break-words">{article.title}</h1>
 
           {article.imageUrl && (
-            <img
-              src={article.imageUrl}
-              alt={article.title}
-              className="w-full h-auto rounded-xl mb-6 sm:mb-8 shadow-lg"
-            />
+            <div className="article-cover mb-6 sm:mb-8">
+              <img
+                src={article.imageUrl}
+                alt={article.title}
+                className="w-full h-full object-cover rounded-xl shadow-lg"
+              />
+            </div>
           )}
 
           <div
-            className="prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-img:rounded-lg prose-img:w-full prose-img:h-auto"
+            className="article-content prose prose-sm sm:prose-base max-w-none"
             dangerouslySetInnerHTML={{__html: article.content}}
           />
+
+          {gallery.length > 0 && (
+            <div className="mt-10 sm:mt-12">
+              <h2 className="text-xl sm:text-2xl font-semibold text-[#2c3e50] mb-4 sm:mb-6">
+                {t('gallery')}
+              </h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                {gallery.map((url, i) => (
+                  <a
+                    key={i}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="article-gallery-item block bg-gray-100 rounded-lg overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  >
+                    <img
+                      src={url}
+                      alt=""
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </article>
       </div>
 
