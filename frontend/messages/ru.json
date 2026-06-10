@@ -293,7 +293,9 @@
   },
   "news": {
     "title": "Новости",
+    "homeSectionTitle": "Новости",
     "readMore": "Читать далее",
+    "readMoreBtn": "Подробнее",
     "noArticles": "Новостей пока нет",
     "backToNews": "Назад к новостям"
   },

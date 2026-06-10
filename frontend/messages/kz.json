@@ -293,7 +293,9 @@
   },
   "news": {
     "title": "Жаңалықтар",
+    "homeSectionTitle": "Жаңалықтар",
     "readMore": "Толығырақ оқу",
+    "readMoreBtn": "Толығырақ",
     "noArticles": "Жаңалықтар әзірге жоқ",
     "backToNews": "Жаңалықтарға оралу"
   },

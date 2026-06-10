@@ -111,6 +111,53 @@ img {
   scroll-snap-type: none;
 }
 
+/* ===== News Carousel ===== */
+.news-track {
+  display: flex;
+  gap: 20px;
+  padding: 10px 4px 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+  user-select: none;
+}
+
+.news-track::-webkit-scrollbar {
+  display: none;
+}
+
+.news-track.grabbing {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.news-card {
+  scroll-snap-align: start;
+  width: 85%;
+}
+
+@media (min-width: 640px) {
+  .news-card {
+    width: calc((100% - 20px) / 2);
+  }
+}
+
+@media (min-width: 768px) {
+  .news-card {
+    width: calc((100% - 40px) / 3);
+  }
+}
+
+@media (min-width: 1024px) {
+  .news-track {
+    gap: 24px;
+  }
+  .news-card {
+    width: calc((100% - 72px) / 4);
+  }
+}
+
 /* ===== Values List Hover Effect ===== */
 .values-list {
   list-style: none;
