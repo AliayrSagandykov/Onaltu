@@ -27,6 +27,15 @@ function slugify(input: string): string {
     .replace(/^-|-$/g, '');
 }
 
+async function uniqueSlug(base: string): Promise<string> {
+  let candidate = base || 'article';
+  let i = 1;
+  while (await prisma.article.findUnique({where: {slug: candidate}})) {
+    candidate = `${base}-${++i}`;
+  }
+  return candidate;
+}
+
 export async function POST(request: NextRequest) {
   const session = await auth();
   if (!session) return Response.json({error: 'Unauthorized'}, {status: 401});
@@ -39,7 +48,6 @@ export async function POST(request: NextRequest) {
     locale,
     slug,
     imageUrl,
-    images,
     published,
     autoTranslate,
   } = body as {
@@ -49,14 +57,13 @@ export async function POST(request: NextRequest) {
     locale?: string;
     slug?: string;
     imageUrl?: string | null;
-    images?: string[];
     published?: boolean;
     autoTranslate?: boolean;
   };
 
   const sourceLocale = locale || 'ru';
   const baseSlug = (slug && slug.trim()) || slugify(title);
-  const imageList = Array.isArray(images) ? images.filter((u) => u && u.trim()) : [];
+  const finalSlug = await uniqueSlug(baseSlug);
 
   const article = await prisma.article.create({
     data: {
@@ -64,28 +71,24 @@ export async function POST(request: NextRequest) {
       content,
       excerpt: excerpt || '',
       locale: sourceLocale,
-      slug: baseSlug,
+      slug: finalSlug,
       imageUrl: imageUrl || null,
-      images: imageList,
       published: published ?? false,
     },
   });
 
   if (autoTranslate !== false) {
     const otherLocales = SUPPORTED_LOCALES.filter((l) => l !== sourceLocale);
-    await Promise.all(
+    await Promise.allSettled(
       otherLocales.map(async (targetLocale) => {
         try {
-          const existing = await prisma.article.findFirst({
-            where: {slug: baseSlug, locale: targetLocale},
-          });
-          if (existing) return;
-
           const [tTitle, tContent, tExcerpt] = await Promise.all([
             translate(title, sourceLocale, targetLocale),
             translate(content, sourceLocale, targetLocale),
             excerpt ? translate(excerpt, sourceLocale, targetLocale) : Promise.resolve(''),
           ]);
+
+          const translatedSlug = await uniqueSlug(`${baseSlug}-${targetLocale}`);
 
           await prisma.article.create({
             data: {
@@ -93,9 +96,8 @@ export async function POST(request: NextRequest) {
               content: tContent,
               excerpt: tExcerpt,
               locale: targetLocale,
-              slug: baseSlug,
+              slug: translatedSlug,
               imageUrl: imageUrl || null,
-              images: imageList,
               published: published ?? false,
             },
           });
@@ -114,12 +116,7 @@ export async function PUT(request: NextRequest) {
   if (!session) return Response.json({error: 'Unauthorized'}, {status: 401});
 
   const body = await request.json();
-  const {id, images, ...rest} = body as {id: string; images?: string[]} & Record<string, unknown>;
-
-  const data: Record<string, unknown> = {...rest};
-  if (Array.isArray(images)) {
-    data.images = images.filter((u): u is string => typeof u === 'string' && !!u.trim());
-  }
+  const {id, ...data} = body as {id: string} & Record<string, unknown>;
 
   const article = await prisma.article.update({
     where: {id},

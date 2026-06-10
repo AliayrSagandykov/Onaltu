@@ -2,6 +2,7 @@
 
 import {useEditor, EditorContent} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Image from '@tiptap/extension-image';
 import {useEffect} from 'react';
 
 interface Props {
@@ -11,7 +12,12 @@ interface Props {
 
 export default function RichTextEditor({content, onChange}: Props) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit,
+      Image.configure({
+        HTMLAttributes: {class: 'article-inline-image'},
+      }),
+    ],
     content,
     onUpdate: ({editor}) => {
       onChange(editor.getHTML());
@@ -31,9 +37,15 @@ export default function RichTextEditor({content, onChange}: Props) {
       active ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
     }`;
 
+  const insertImage = () => {
+    const url = window.prompt('URL изображения (https://... или /images/photo.jpg):');
+    if (url && url.trim()) {
+      editor.chain().focus().setImage({src: url.trim()}).run();
+    }
+  };
+
   return (
     <div className="tiptap-editor">
-      {/* Toolbar */}
       <div className="flex flex-wrap gap-1 pb-3 mb-3 border-b border-gray-200">
         <button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={btn(editor.isActive('bold'))}>
           <b>B</b>
@@ -64,6 +76,10 @@ export default function RichTextEditor({content, onChange}: Props) {
         </button>
         <button type="button" onClick={() => editor.chain().focus().setHorizontalRule().run()} className={btn(false)}>
           ─ Линия
+        </button>
+        <div className="w-px bg-gray-300 mx-1" />
+        <button type="button" onClick={insertImage} className={btn(false)} title="Вставить фото">
+          🖼️ Фото
         </button>
         <div className="w-px bg-gray-300 mx-1" />
         <button type="button" onClick={() => editor.chain().focus().undo().run()} className={btn(false)}>

@@ -7,6 +7,22 @@ const LANG_MAP: Record<string, string> = {
 export const SUPPORTED_LOCALES = ['ru', 'kz', 'en'] as const;
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
+const REQUEST_TIMEOUT_MS = 8000;
+
+async function fetchWithTimeout(url: string): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    return await fetch(url, {
+      headers: {'User-Agent': 'Mozilla/5.0'},
+      cache: 'no-store',
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function translate(
   text: string,
   sourceLocale: string,
@@ -16,25 +32,33 @@ export async function translate(
   const sl = LANG_MAP[sourceLocale] || sourceLocale;
   const tl = LANG_MAP[targetLocale] || targetLocale;
 
-  const chunks = chunkText(text, 4500);
-  const translatedChunks: string[] = [];
+  try {
+    const chunks = chunkText(text, 4500);
+    const translatedChunks: string[] = [];
 
-  for (const chunk of chunks) {
-    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(chunk)}`;
-    const res = await fetch(url, {
-      headers: {'User-Agent': 'Mozilla/5.0'},
-      cache: 'no-store',
-    });
-    if (!res.ok) throw new Error(`Translation HTTP ${res.status}`);
-    const data = (await res.json()) as unknown;
-    const segments = Array.isArray(data) && Array.isArray((data as unknown[])[0]) ? ((data as unknown[])[0] as unknown[]) : [];
-    const out = segments
-      .map((s) => (Array.isArray(s) && typeof s[0] === 'string' ? s[0] : ''))
-      .join('');
-    translatedChunks.push(out || chunk);
+    for (const chunk of chunks) {
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(chunk)}`;
+      const res = await fetchWithTimeout(url);
+      if (!res.ok) {
+        translatedChunks.push(chunk);
+        continue;
+      }
+      const data = (await res.json()) as unknown;
+      const segments =
+        Array.isArray(data) && Array.isArray((data as unknown[])[0])
+          ? ((data as unknown[])[0] as unknown[])
+          : [];
+      const out = segments
+        .map((s) => (Array.isArray(s) && typeof s[0] === 'string' ? s[0] : ''))
+        .join('');
+      translatedChunks.push(out || chunk);
+    }
+
+    return translatedChunks.join('');
+  } catch (e) {
+    console.error('Translation failed, falling back to original:', e);
+    return text;
   }
-
-  return translatedChunks.join('');
 }
 
 function chunkText(text: string, maxLen: number): string[] {

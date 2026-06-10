@@ -10,7 +10,6 @@ interface Article {
   content: string;
   excerpt: string | null;
   imageUrl: string | null;
-  images?: string[];
   published: boolean;
 }
 
@@ -26,7 +25,6 @@ export default function NewsEditor({article, onSave, onCancel}: Props) {
   const [content, setContent] = useState(article?.content || '');
   const [excerpt, setExcerpt] = useState(article?.excerpt || '');
   const [imageUrl, setImageUrl] = useState(article?.imageUrl || '');
-  const [images, setImages] = useState<string[]>(article?.images || []);
   const [published, setPublished] = useState(article?.published || false);
   const [autoTranslate, setAutoTranslate] = useState(true);
 
@@ -40,23 +38,16 @@ export default function NewsEditor({article, onSave, onCancel}: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const cleanImages = images.map((s) => s.trim()).filter(Boolean);
     onSave({
       title,
       slug,
       content,
       excerpt,
       imageUrl: imageUrl || null,
-      images: cleanImages,
       published,
       autoTranslate: !article ? autoTranslate : undefined,
     });
   };
-
-  const addImage = () => setImages([...images, '']);
-  const removeImage = (idx: number) => setImages(images.filter((_, i) => i !== idx));
-  const updateImage = (idx: number, value: string) =>
-    setImages(images.map((u, i) => (i === idx ? value : u)));
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -102,61 +93,25 @@ export default function NewsEditor({article, onSave, onCancel}: Props) {
           className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
           placeholder="https://... или /images/photo.jpg"
         />
-      </div>
-
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="block text-sm font-semibold text-gray-700">
-            Дополнительные фотографии ({images.length})
-          </label>
-          <button
-            type="button"
-            onClick={addImage}
-            className="text-sm bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100"
-          >
-            <i className="fas fa-plus mr-1" /> Добавить фото
-          </button>
-        </div>
-        {images.length === 0 ? (
-          <p className="text-sm text-gray-400 italic">Нет дополнительных фотографий</p>
-        ) : (
-          <div className="space-y-2">
-            {images.map((url, idx) => (
-              <div key={idx} className="flex gap-2 items-center">
-                <span className="text-xs text-gray-400 w-6 text-center">{idx + 1}</span>
-                <input
-                  type="text"
-                  value={url}
-                  onChange={(e) => updateImage(idx, e.target.value)}
-                  className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
-                  placeholder="https://... или /images/photo.jpg"
-                />
-                {url && (
-                  <img
-                    src={url}
-                    alt=""
-                    className="w-12 h-12 object-cover rounded border border-gray-200"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
-                )}
-                <button
-                  type="button"
-                  onClick={() => removeImage(idx)}
-                  className="text-red-500 hover:text-red-700 px-2"
-                  title="Удалить"
-                >
-                  <i className="fas fa-trash" />
-                </button>
-              </div>
-            ))}
-          </div>
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt=""
+            className="mt-3 w-40 h-24 object-cover rounded-lg border border-gray-200"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none';
+            }}
+          />
         )}
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">Содержание</label>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Содержание
+        </label>
+        <p className="text-xs text-gray-500 mb-2">
+          💡 Чтобы добавить несколько фото в новость — нажмите кнопку 🖼️ Фото в панели редактора и вставьте URL.
+        </p>
         <RichTextEditor content={content} onChange={setContent} />
       </div>
 
