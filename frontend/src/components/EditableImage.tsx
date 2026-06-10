@@ -34,12 +34,32 @@ export default function EditableImage({contentKey, locale, src: initialSrc, alt,
   };
 
   if (!editMode) {
-    return <Image src={src} alt={alt} width={width} height={height} className={className} unoptimized />;
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        style={{maxWidth: '100%', height: 'auto'}}
+        unoptimized
+      />
+    );
   }
 
   return (
-    <div className="relative group">
-      <Image src={src} alt={alt} width={width} height={height} className={`${className} outline-2 outline-dashed outline-orange-400 outline-offset-2`} unoptimized />
+    <div className="relative group inline-block max-w-full">
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={`${className} outline-2 outline-dashed outline-orange-400 outline-offset-2`}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        style={{maxWidth: '100%', height: 'auto'}}
+        unoptimized
+      />
       {!editing && (
         <div
           onClick={() => setEditing(true)}

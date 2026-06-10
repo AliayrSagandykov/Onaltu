@@ -7,9 +7,9 @@ export default function Footer() {
   const t = useTranslations('footer');
 
   return (
-    <footer className="bg-[#2c3e50] text-[#ecf0f1] pt-16 pb-6 text-[0.95rem]">
+    <footer className="bg-[#2c3e50] text-[#ecf0f1] pt-10 sm:pt-16 pb-6 text-sm sm:text-[0.95rem]">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {/* Map */}
           <div>
             <div className="footer-map-container">
