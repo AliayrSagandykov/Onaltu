@@ -293,7 +293,9 @@
   },
   "news": {
     "title": "News",
+    "homeSectionTitle": "News",
     "readMore": "Read more",
+    "readMoreBtn": "Learn more",
     "noArticles": "No articles yet",
     "backToNews": "Back to news"
   },

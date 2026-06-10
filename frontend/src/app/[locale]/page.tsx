@@ -5,9 +5,11 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import PartnersCarousel, {type PartnerItem} from '@/components/PartnersCarousel';
+import NewsCarousel, {type NewsItem} from '@/components/NewsCarousel';
 import FAQSection from '@/components/FAQSection';
 import Link from 'next/link';
 import {getContents} from '@/lib/pageContent';
+import {prisma} from '@/lib/prisma';
 import EditableText from '@/components/EditableText';
 import EditableImage from '@/components/EditableImage';
 
@@ -209,14 +211,34 @@ function MembershipSection({locale, c}: {locale: string; c: C}) {
 export default async function HomePage({params}: {params: Promise<{locale: string}>}) {
   const {locale} = await params;
 
-  const [heroT, aboutT, missionT, membershipT, faqT, partnersT] = await Promise.all([
+  const [heroT, aboutT, missionT, membershipT, faqT, partnersT, newsT] = await Promise.all([
     getTranslations({locale, namespace: 'hero'}),
     getTranslations({locale, namespace: 'aboutSection'}),
     getTranslations({locale, namespace: 'mission'}),
     getTranslations({locale, namespace: 'membership'}),
     getTranslations({locale, namespace: 'faq'}),
     getTranslations({locale, namespace: 'partners'}),
+    getTranslations({locale, namespace: 'news'}),
   ]);
+
+  let newsArticles: NewsItem[] = [];
+  try {
+    const rows = await prisma.article.findMany({
+      where: {locale, published: true},
+      orderBy: {createdAt: 'desc'},
+      take: 12,
+    });
+    newsArticles = rows.map((a) => ({
+      id: a.id,
+      slug: a.slug,
+      title: a.title,
+      excerpt: a.excerpt,
+      imageUrl: a.imageUrl,
+      createdAt: a.createdAt.toISOString(),
+    }));
+  } catch {
+    // DB not initialized yet
+  }
 
   const missionValues: string[] = missionT.raw('values');
   const membershipBenefits: Array<{title: string; description: string; highlight: string}> = membershipT.raw('benefits');
@@ -308,6 +330,12 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       <PartnersCarousel locale={locale} titleValue={c['partners.title']} partners={partners} />
       <MissionSection locale={locale} c={c} />
       <MembershipSection locale={locale} c={c} />
+      <NewsCarousel
+        locale={locale}
+        title={newsT('homeSectionTitle')}
+        readMoreLabel={newsT('readMoreBtn')}
+        articles={newsArticles}
+      />
       <FAQSection locale={locale} c={c} />
       <Footer />
       <ScrollToTop />
