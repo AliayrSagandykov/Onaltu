@@ -297,7 +297,9 @@
     "readMore": "Read more",
     "readMoreBtn": "Learn more",
     "noArticles": "No articles yet",
-    "backToNews": "Back to news"
+    "backToNews": "Back to news",
+    "newer": "Newer",
+    "older": "Older"
   },
   "admin": {
     "login": "Admin Panel Login",

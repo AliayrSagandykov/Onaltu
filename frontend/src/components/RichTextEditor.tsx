@@ -3,7 +3,8 @@
 import {useEditor, EditorContent} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
-import {useEffect} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {compressImage} from '@/lib/compressImage';
 
 interface Props {
   content: string;
@@ -14,15 +15,14 @@ export default function RichTextEditor({content, onChange}: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Image.configure({
-        HTMLAttributes: {class: 'article-inline-image'},
-      }),
+      Image.configure({HTMLAttributes: {class: 'article-inline-image'}}),
     ],
     content,
-    onUpdate: ({editor}) => {
-      onChange(editor.getHTML());
-    },
+    onUpdate: ({editor}) => onChange(editor.getHTML()),
   });
+
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (editor && content !== editor.getHTML()) {
@@ -37,10 +37,21 @@ export default function RichTextEditor({content, onChange}: Props) {
       active ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
     }`;
 
-  const insertImage = () => {
-    const url = window.prompt('URL изображения (https://... или /images/photo.jpg):');
-    if (url && url.trim()) {
-      editor.chain().focus().setImage({src: url.trim()}).run();
+  const handleImageFile = async (file: File) => {
+    if (!file.type.startsWith('image/')) return;
+    if (file.size > 20 * 1024 * 1024) {
+      alert('Файл слишком большой (макс. 20 МБ)');
+      return;
+    }
+    setUploading(true);
+    try {
+      const dataUrl = await compressImage(file, 1200, 0.82);
+      editor.chain().focus().setImage({src: dataUrl}).run();
+    } catch (e) {
+      console.error(e);
+      alert('Не удалось загрузить изображение');
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -78,8 +89,20 @@ export default function RichTextEditor({content, onChange}: Props) {
           ─ Линия
         </button>
         <div className="w-px bg-gray-300 mx-1" />
-        <button type="button" onClick={insertImage} className={btn(false)} title="Вставить фото">
-          🖼️ Фото
+        <button
+          type="button"
+          onClick={() => imageInputRef.current?.click()}
+          disabled={uploading}
+          className={`${btn(false)} disabled:opacity-60 disabled:cursor-wait`}
+          title="Загрузить фото в текст"
+        >
+          {uploading ? (
+            <>
+              <i className="fas fa-spinner fa-spin mr-1" /> Загрузка
+            </>
+          ) : (
+            <>🖼️ Фото</>
+          )}
         </button>
         <div className="w-px bg-gray-300 mx-1" />
         <button type="button" onClick={() => editor.chain().focus().undo().run()} className={btn(false)}>
@@ -89,6 +112,18 @@ export default function RichTextEditor({content, onChange}: Props) {
           ↪ Повторить
         </button>
       </div>
+
+      <input
+        ref={imageInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          if (file) handleImageFile(file);
+          e.target.value = '';
+        }}
+      />
 
       <EditorContent editor={editor} />
     </div>
