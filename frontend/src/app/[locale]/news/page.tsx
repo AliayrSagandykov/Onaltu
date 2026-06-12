@@ -22,17 +22,21 @@ export default async function NewsPage({params}: {params: Promise<{locale: strin
     // DB not initialized yet
   }
 
+  const dateLocale = locale === 'kz' ? 'kk-KZ' : locale === 'en' ? 'en-US' : 'ru-RU';
+
   return (
     <>
       <TopBar />
       <Navbar />
 
-      <div className="container mx-auto px-4 py-10 sm:py-16 min-h-[60vh]">
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#2c3e50] mb-8 sm:mb-10 section-title-underline">{t('title')}</h1>
+      <div className="container mx-auto px-4 py-10 sm:py-14 min-h-[60vh]">
+        <h1 className="text-3xl sm:text-4xl font-bold text-[#2c3e50] mb-8 sm:mb-10 section-title-underline">
+          {t('title')}
+        </h1>
 
         {articles.length === 0 ? (
-          <div className="text-center text-gray-500 py-12 sm:py-20">
-            <i className="fas fa-newspaper text-5xl sm:text-6xl mb-4 opacity-30" />
+          <div className="text-center text-gray-400 py-16 sm:py-24 bg-gray-50 rounded-2xl">
+            <i className="fas fa-newspaper text-5xl sm:text-6xl mb-4 opacity-40" />
             <p className="text-lg sm:text-xl">{t('noArticles')}</p>
           </div>
         ) : (
@@ -41,29 +45,39 @@ export default async function NewsPage({params}: {params: Promise<{locale: strin
               <Link
                 key={article.id}
                 href={`/${locale}/news/${article.slug}`}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group flex flex-col"
+                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group flex flex-col"
               >
-                {article.imageUrl && (
-                  <div className="aspect-video w-full overflow-hidden">
+                {article.imageUrl ? (
+                  <div className="aspect-video w-full overflow-hidden bg-gray-100">
                     <img
                       src={article.imageUrl}
                       alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
+                  </div>
+                ) : (
+                  <div className="aspect-video w-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
+                    <i className="fas fa-newspaper text-5xl text-blue-300" />
                   </div>
                 )}
                 <div className="p-5 sm:p-6 flex flex-col flex-grow">
-                  <div className="text-sm text-gray-400 mb-2">
-                    {new Date(article.createdAt).toLocaleDateString(locale === 'kz' ? 'kk-KZ' : locale === 'en' ? 'en-US' : 'ru-RU')}
+                  <div className="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                    <i className="far fa-calendar-alt" />
+                    {new Date(article.createdAt).toLocaleDateString(dateLocale, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
                   </div>
-                  <h2 className="text-lg sm:text-xl font-bold text-[#2c3e50] mb-3 group-hover:text-blue-600 transition-colors">
+                  <h2 className="text-lg sm:text-xl font-bold text-[#2c3e50] mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                     {article.title}
                   </h2>
                   {article.excerpt && (
-                    <p className="text-gray-500 line-clamp-3">{article.excerpt}</p>
+                    <p className="text-gray-500 line-clamp-3 text-sm">{article.excerpt}</p>
                   )}
-                  <span className="inline-block mt-4 text-blue-600 font-medium">
-                    {t('readMore')} →
+                  <span className="inline-flex items-center gap-1.5 mt-4 text-blue-600 font-medium text-sm group-hover:gap-2.5 transition-all">
+                    {t('readMore')}
+                    <i className="fas fa-arrow-right text-xs" />
                   </span>
                 </div>
               </Link>
