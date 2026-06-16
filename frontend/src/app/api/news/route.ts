@@ -2,6 +2,7 @@ import {NextRequest} from 'next/server';
 import {prisma} from '@/lib/prisma';
 import {auth} from '@/lib/auth';
 import {SUPPORTED_LOCALES, translate} from '@/lib/translate';
+import {slugify} from '@/lib/slug';
 
 export async function GET(request: NextRequest) {
   const {searchParams} = request.nextUrl;
@@ -17,14 +18,6 @@ export async function GET(request: NextRequest) {
   });
 
   return Response.json(articles);
-}
-
-function slugify(input: string): string {
-  return input
-    .toLowerCase()
-    .replace(/[^a-zа-яё0-9]+/gi, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
 }
 
 async function uniqueSlug(base: string): Promise<string> {
