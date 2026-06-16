@@ -55,19 +55,21 @@ export default function AdminNewsPage() {
   };
 
   const handleSave = async (data: Record<string, unknown>) => {
-    if (editing) {
-      await fetch('/api/news', {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({id: editing.id, ...data}),
-      });
-    } else {
-      await fetch('/api/news', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({...data, locale}),
-      });
+    const url = '/api/news';
+    const method = editing ? 'PUT' : 'POST';
+    const body = editing ? {id: editing.id, ...data} : {...data, locale};
+    const res = await fetch(url, {
+      method,
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      throw new Error(`Не удалось сохранить (HTTP ${res.status})`);
     }
+    return res.json();
+  };
+
+  const handleDone = () => {
     setEditing(null);
     setCreating(false);
     fetchArticles();
@@ -110,7 +112,13 @@ export default function AdminNewsPage() {
           </div>
         </header>
         <main className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
-          <NewsEditor article={editing} onSave={handleSave} onCancel={closeEditor} />
+          <NewsEditor
+            article={editing}
+            sourceLocale={editing ? editing.locale : locale}
+            onSave={handleSave}
+            onDone={handleDone}
+            onCancel={closeEditor}
+          />
         </main>
       </div>
     );
