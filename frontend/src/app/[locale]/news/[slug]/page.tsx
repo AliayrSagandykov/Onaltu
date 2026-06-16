@@ -6,23 +6,32 @@ import TopBar from '@/components/TopBar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
+import {slugCandidates} from '@/lib/slug';
 
 export const dynamic = 'force-dynamic';
 
 export default async function ArticlePage({params}: {params: Promise<{locale: string; slug: string}>}) {
-  const {locale, slug} = await params;
+  const {locale, slug: rawSlug} = await params;
   const t = await getTranslations({locale, namespace: 'news'});
 
-  let article;
+  const candidates = slugCandidates(rawSlug);
+
+  let article = null;
   try {
     article = await prisma.article.findFirst({
-      where: {slug, locale, published: true},
+      where: {slug: {in: candidates}, locale, published: true},
     });
-  } catch {
+  } catch (e) {
+    console.error('[news/[slug]] DB lookup failed:', e);
     notFound();
   }
 
-  if (!article) notFound();
+  if (!article) {
+    console.warn(
+      `[news/[slug]] 404 — locale=${locale}, raw="${rawSlug}", candidates=${JSON.stringify(candidates)}`,
+    );
+    notFound();
+  }
 
   const [olderArticle, newerArticle] = await Promise.all([
     prisma.article
